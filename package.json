@@ -1,0 +1,79 @@
+{
+    "name": "phatpham-ou-seccrawler",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "prestart": "npm run -s build",
+        "start": "node ./dist/server.js",
+        "predev": "npm run -s build",
+        "dev": "node --inspect ./dist/server.js",
+        "clean": "rimraf dist -p",
+        "build": "npm run clean && mkdir -p dist && babel src -s -D -d dist"
+    },
+    "babel": {
+        "presets": [
+            [
+                "@babel/preset-env",
+                {
+                    "useBuiltIns": "entry",
+                    "corejs": 3,
+                    "targets": {
+                        "node": "current"
+                    }
+                }
+            ]
+        ],
+        "plugins": [
+            "@babel/plugin-proposal-object-rest-spread",
+            "@babel/plugin-proposal-class-properties",
+            "@babel/plugin-proposal-optional-chaining"
+        ]
+    },
+    "dependencies": {
+        "@babel/cli": "^7.15.7",
+        "@babel/core": "^7.15.5",
+        "@babel/plugin-proposal-class-properties": "^7.14.5",
+        "@babel/plugin-proposal-object-rest-spread": "^7.15.6",
+        "@babel/plugin-proposal-optional-chaining": "^7.14.5",
+        "@babel/preset-env": "^7.15.6",
+        "bcryptjs": "^2.4.3",
+        "cheerio": "^1.0.0-rc.10",
+        "convert-excel-to-json": "^1.7.0",
+        "cookie-parser": "~1.4.4",
+        "core-js": "^3.18.0",
+        "cors": "^2.8.5",
+        "crypto": "^1.0.1",
+        "debug": "~2.6.9",
+        "dotenv": "^10.0.0",
+        "exceljs": "^4.3.0",
+        "express": "~4.16.1",
+        "form-data": "^4.0.0",
+        "fs": "^0.0.1-security",
+        "hbs": "~4.0.4",
+        "http-errors": "~1.6.3",
+        "https": "^1.0.0",
+        "json2xls": "^0.1.2",
+        "jsonwebtoken": "^8.5.1",
+        "jwt-decode": "^3.1.2",
+        "lodash": "^4.17.21",
+        "module-alias": "^2.2.2",
+        "moment": "^2.29.1",
+        "moment-timezone": "^0.5.33",
+        "morgan": "~1.9.1",
+        "nightmare": "^3.0.2",
+        "nightwatch": "^1.7.11",
+        "node-fetch": "^2.6.5",
+        "rimraf": "^3.0.2",
+        "secure-random-password": "^0.2.3",
+        "toad-scheduler": "^1.5.0",
+        "xlsx-parse-json": "^3.1.1",
+        "xlsx-to-json": "^0.3.0"
+    },
+    "devDependencies": {
+        "@babel/eslint-parser": "^7.15.7",
+        "@react-native-community/eslint-config": "^3.0.1",
+        "@types/express": "^4.17.13",
+        "eslint": "^7.32.0",
+        "eslint-plugin-react-hooks": "^4.2.0"
+    }
+}
