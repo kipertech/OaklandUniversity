@@ -12,6 +12,7 @@ const key = fs.readFileSync(path.join(__dirname, 'cert/CA/localhost/localhost.de
 const cert = fs.readFileSync(path.join(__dirname, 'cert/CA/localhost/localhost.crt'));
 
 import https from 'https';
+import http from 'http';
 
 import app from './app.js';
 
@@ -24,9 +25,10 @@ app.set('port', port);
 
 /**
  * Create HTTP server.
+ * Fake SSL key for localhost is also added
  */
 
-let server = https.createServer({ key, cert }, app);
+let server = process.env.IS_LOCAL === 'true' ? https.createServer({ key, cert }, app) : http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
