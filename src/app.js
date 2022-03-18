@@ -5,10 +5,11 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import cors from 'cors';
 
+// Routers
 import indexRouter from './routes';
-import usersRouter from './routes/users';
 import profTomlinRouter from "./routes/route_profTomlin";
 import profChoRouter from "./routes/route_profCho";
+import { secondHandHoundsRouter } from "./routes/route_secondHandHounds";
 
 let app = express();
 
@@ -25,9 +26,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routers
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/profCho', profChoRouter);
 app.use('/profTomlin', profTomlinRouter);
+app.use('/secondHandHounds', secondHandHoundsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
