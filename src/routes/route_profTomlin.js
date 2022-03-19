@@ -9,6 +9,7 @@ import {
     Abort,
     Success
 } from '../utils';
+import codeFile from "../../tempData/profTomlin_hts8Codes.json";
 
 let profTomlinRouter = Router();
 
@@ -862,9 +863,54 @@ profTomlinRouter.get('/tariff/codes', (request, response) => {
 });
 // endregion
 
-profTomlinRouter.post('/tariff/fillCodes', (request, response) => {
-    let codeFile = require('../../tempData/profTomlin_hts8Codes.json'),
-        codeFilePath = "D:\\Drive\\Classes\\Oakland\\GA\\Prof Tomlin\\Tariff Project\\Processed Files\\NAICS_Codes_Only.xlsx";
+// region GET - HTS8 to NAICS/SIC paired with Year
+profTomlinRouter.get('/tariff/codeByYear', (request, response) => {
+    let rawCodeFile = "D:\\Drive\\Classes\\Oakland\\GA\\Prof Tomlin\\Tariff Project\\Tariff - SIC 2 Digits\\hts8_to_naics_sic.xlsx",
+        codeObj = {};
+
+    // Pair HTS8 with year
+    const workbook = new ExcelJS.Workbook();
+    workbook.xlsx.readFile(rawCodeFile)
+        .then((workbookContent) => {
+            const worksheet = workbookContent.worksheets[0];
+
+            worksheet.eachRow((row, rowNumber) => {
+                if (rowNumber > 1)
+                {
+                    let hts8 = row.values[1]?.toString().trim(),
+                        naics = row.values[2]?.toString().trim() || '',
+                        sic = row.values[3]?.toString().trim() || '',
+                        year = row.values[4]?.toString().trim();
+
+                    // Remove leading zero in HTS8 to match with the other file
+                    if (hts8.startsWith('0')) hts8 = hts8.substring(1);
+
+                    // Paired code
+                    let pairedCode = hts8 + ',' + year;
+
+                    // Start putting data in
+                    if (codeObj[pairedCode])
+                    {
+                        if (naics && !codeObj[pairedCode].naics) codeObj[pairedCode].naics = naics;
+                        if (sic && !codeObj[pairedCode].sic) codeObj[pairedCode].sic = sic;
+                    }
+                    else codeObj[pairedCode] = { naics, sic };
+                }
+            });
+
+            // Write to file
+            writeFile(`./tempData/profTomlin_PairedHTS8.json`, JSON.stringify(codeObj, null, 4))
+                .then(() => Success(response, 'Successfully fetched HTS8/NAICS/SIC codes'))
+                .catch((writeError) => Abort(response, 'Write Error', 500, writeError.message));
+        })
+        .catch((error) => Abort(response, 'Failed to read file', 500, error.message));
+});
+// endregion
+
+// region - Fill Codes Step 1
+profTomlinRouter.post('/tariff/fillCodes1', (request, response) => {
+    let codeFile = require('../../tempData/profTomlin_PairedHTS8.json'),
+        codeFilePath = "D:\\Drive\\Classes\\Oakland\\GA\\Prof Tomlin\\Tariff Project\\Tariff - SIC 2 Digits\\tariff_database_master.xlsx";
 
     const workbook = new ExcelJS.Workbook();
     workbook.xlsx.readFile(codeFilePath)
@@ -875,10 +921,42 @@ profTomlinRouter.post('/tariff/fillCodes', (request, response) => {
             worksheet.eachRow((row, rowNumber) => {
                 if (rowNumber > 1)
                 {
-                    let currentHTS8 = row.values[1]?.toString().trim,
+                    let hts8 = row.values[1],
+                        year = row.values[4],
+                        pairedCode = hts8 + ',' + year;
+
+                    worksheet.getCell(rowNumber, 2).value = codeFile[pairedCode]?.naics || '';
+                    worksheet.getCell(rowNumber, 3).value = codeFile[pairedCode]?.sic || '';
+                    row.commit();
+                }
+            });
+
+            workbook.xlsx.writeFile(codeFilePath)
+                .then(() => Success(response, 'Successfully write file'))
+                .catch((writeError) => Abort(response, 'Failed to write file', 500, writeError.message));
+        })
+        .catch((error) => Abort(response, 'Failed to read file', 500, error.message));
+});
+// endregion
+
+// region Fill Codes Step 2
+profTomlinRouter.post('/tariff/fillCodes2', (request, response) => {
+    let codeFile = require('../../tempData/profTomlin_hts8Codes.json'),
+        codeFilePath = "D:\\Drive\\Classes\\Oakland\\GA\\Prof Tomlin\\Tariff Project\\Tariff - SIC 2 Digits\\tariff_database_master.xlsx";
+
+    const workbook = new ExcelJS.Workbook();
+    workbook.xlsx.readFile(codeFilePath)
+        .then((workbookContent) => {
+            const worksheet = workbookContent.worksheets[0];
+
+            // Go thru all HTS8 code
+            worksheet.eachRow((row, rowNumber) => {
+                if (rowNumber > 1)
+                {
+                    let currentHTS8 = row.values[1]?.toString().trim(),
                         currentNAICS = row.values[2]?.toString().trim(),
                         currentSIC = row.values[3]?.toString().trim(),
-                        currentYear = row.values[3]?.toString().trim();
+                        currentYear = row.values[4]?.toString().trim();
 
                     let newNAICS = currentNAICS || Object.keys(codeFile['hts8Map']).find((naicsKey) => codeFile['hts8Map'][naicsKey] === currentHTS8) || "",
                         newSIC = currentSIC || codeFile['sicMap'][newNAICS] || "";
@@ -890,7 +968,7 @@ profTomlinRouter.post('/tariff/fillCodes', (request, response) => {
                     {
                         let nextRow = worksheet.getRow(rowNumber + 1);
 
-                        let nextHTS8 = nextRow.values[1]?.toString().trim,
+                        let nextHTS8 = nextRow.values[1]?.toString().trim(),
                             nextNAICS = nextRow.values[2]?.toString().trim(),
                             nextYear = nextRow.values[3]?.toString().trim();
 
@@ -906,9 +984,9 @@ profTomlinRouter.post('/tariff/fillCodes', (request, response) => {
                     {
                         let previousRow = worksheet.getRow(rowNumber - 1);
 
-                        let previousHTS8 = previousRow.values[1]?.toString().trim,
+                        let previousHTS8 = previousRow.values[1]?.toString().trim(),
                             previousNAICS = previousRow.values[2]?.toString().trim(),
-                            previousYear = previousRow.values[3]?.toString().trim();
+                            previousYear = previousRow.values[4]?.toString().trim();
 
                         if (previousHTS8 === currentHTS8 && (currentYear !== previousYear) && (Number(previousYear) >= 2020))
                         {
@@ -1678,6 +1756,105 @@ profTomlinRouter.post('/exportCombinedSIC', (request, response) => {
 
             // Write to file
             workbook.xlsx.writeFile(filePath)
+                .then(() => Success(response, 'Successfully write file'))
+                .catch((writeError) => Abort(response, 'Failed to write file', 500, writeError.message));
+        })
+        .catch((error) => Abort(response, 'Failed to read file', 500, error.message));
+});
+// endregion
+
+// endregion
+
+// region --- TARIFF WITH 2 DIGIT SIC ---
+profTomlinRouter.get('/2digitTariff', (request, response) => {
+    let filePath = "D:\\Drive\\Classes\\Oakland\\GA\\Prof Tomlin\\Tariff Project\\Tariff - SIC 2 Digits\\tariff_database_master.xlsx";
+
+    const startingJSON = require('../../tempData/profTomlin_combinedTariff_2Digits.json');
+
+    const workbook = new ExcelJS.Workbook();
+
+    workbook.xlsx.readFile(filePath)
+        .then((workbookContent) =>
+        {
+            const worksheet = workbookContent.worksheets[0];
+
+            // Append to the original JSON
+            let sicObj = JSON.parse(JSON.stringify(startingJSON));
+
+            // Go thru rows
+            worksheet.eachRow((row, rowNumber) => {
+                if (rowNumber > 1)
+                {
+                    let rowValues = row.values;
+
+                    let sic = rowValues[3]?.toString().substring(0, 2),
+                        year = rowValues[4]?.toString(),
+                        mfnValue = Number(Number(rowValues[5] || 0).toFixed(1)),
+                        colValue = Number(Number(rowValues[6] || 0).toFixed(1));
+
+                    // Check SIC exists
+                    if (sic?.trim() && (sic !== '02') && (Number(sic || 0) >= 20 && Number(sic || 0) <= 39))
+                    {
+                        if (!sicObj[sic]) sicObj[sic] = {};
+
+                        // Check year exists in SIC
+                        // and add the record count for later average
+                        if (!sicObj[sic][year])
+                        {
+                            sicObj[sic][year] = { RECORD_COUNT: 1 };
+                        }
+                        else sicObj[sic][year]['RECORD_COUNT'] += 1;
+
+                        // Add MFN and COL Values
+                        if (sicObj[sic][year]['tariffMFN'])
+                        {
+                            sicObj[sic][year]['tariffMFN'] = Number((sicObj[sic][year]['tariffMFN'] + mfnValue).toFixed(1));
+                        }
+                        else sicObj[sic][year]['tariffMFN'] = mfnValue;
+
+                        if (sicObj[sic][year]['tariffCOL'])
+                        {
+                            sicObj[sic][year]['tariffCOL'] = Number((sicObj[sic][year]['tariffCOL'] + colValue).toFixed(1));
+                        }
+                        else sicObj[sic][year]['tariffCOL'] = colValue;
+                    }
+                }
+            });
+
+            // Write to file
+            writeFile(`./tempData/profTomlin_combinedTariff_2Digits.json`, JSON.stringify(sicObj, null, 4))
+                .then(() => Success(response, 'Successfully fetch combined SIC data', sicObj))
+                .catch((writeError) => Abort(response, 'Write Error', 500, writeError.message));
+        })
+        .catch((error) => Abort(response, 'Failed to read file', 500, error.message));
+});
+
+// region POST - Fill MFN and COL
+profTomlinRouter.post('/naics/fillMFNandCOL', (request, response) => {
+    let codeFile = require('../../tempData/profTomlin_combinedTariff_2Digits.json'),
+        fillingFilePath = "D:\\Drive\\Classes\\Oakland\\GA\\Prof Tomlin\\NAICS Unemployment Rate\\profTomlin_combinedSIC_2digits.xlsx";
+
+    const workbook = new ExcelJS.Workbook();
+    workbook.xlsx.readFile(fillingFilePath)
+        .then((workbookContent) => {
+            const worksheet = workbookContent.worksheets[0];
+
+            // Go thru all HTS8 code
+            worksheet.eachRow((row, rowNumber) => {
+                if (rowNumber > 1)
+                {
+                    let sic = row.values[1],
+                        year = row.values[2];
+
+                    let dataObj = codeFile[sic]?.[year] || { "RECORD_COUNT": 1, "tariffMFN": 0, "tariffCOL": 0 };
+
+                    worksheet.getCell(rowNumber, 4).value = Number((dataObj.tariffMFN / dataObj.RECORD_COUNT).toFixed(1));
+                    worksheet.getCell(rowNumber, 5).value = Number((dataObj.tariffCOL / dataObj.RECORD_COUNT).toFixed(1));
+                    row.commit();
+                }
+            });
+
+            workbook.xlsx.writeFile(fillingFilePath)
                 .then(() => Success(response, 'Successfully write file'))
                 .catch((writeError) => Abort(response, 'Failed to write file', 500, writeError.message));
         })
