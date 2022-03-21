@@ -12,15 +12,26 @@ import { Router } from "express";
 import nodeScheduler from 'node-schedule';
 import moment from 'moment-timezone';
 import MySQL from 'mysql';
+import { Promise } from "bluebird";
 
 // Helpers
 import { apiWrapper } from "../utils/util_api_helpers";
+import { Success } from "../utils";
 
 // Define scheduler
 const scheduler = new ToadScheduler();
 
 // Global
 const GLOBAL = require('../configs/config_secondHandHounds');
+
+let secondHandHoundsRouter = Router();
+
+// region Check local
+function isLocal()
+{
+    return(process.env.IS_LOCAL === 'true');
+}
+// endregion
 
 // region --- DATABASE ---
 
@@ -84,7 +95,7 @@ function updateSchedulerConfig(jobID, nextRunAt)
             if (error)
             {
                 connection.end();
-                sendSlackMessage('Updating SchedulerConfigs', error.sqlMessage);
+                sendSlackMessage('Updated SchedulerConfigs', error.sqlMessage);
             }
             else connection.end();
         }
@@ -127,28 +138,47 @@ function addSchedulerConfig(jobName, nextRunAt)
 }
 // endregion
 
-// endregion
-
-// region --- RESCUE GROUPS API ---
-
-// region List Animal API
-export function getAnimalList(currentPage = 1, pageSize = 100)
+// region Query - Add Record to Table
+function addRecord(table, dbAttributeList = [], recordValueList = [])
 {
-    return apiWrapper(
-        `/animals?page=${currentPage}&limit=${pageSize}`,
-        'GET',
-        'GET ANIMAL LIST'
-    );
+    let sqlStatement =
+        `INSERT INTO ${table} (${dbAttributeList.map((item) => (item + ' = ?')).join(', ')}) VALUES` +
+        recordValueList.map((record) => record + '\n') +
+        `ON DUPLICATE KEY UPDATE ${dbAttributeList.map((item) => (item + ' = VALUES(' + item + ')'))}`;
+
+    console.log(sqlStatement);
+    return;
+
+    const connection = getMySQLConnection();
+    connection.query(sqlStatement, () => connection.end());
 }
 // endregion
 
 // endregion
 
+// region Instance Variables
 const jobNames = {
-    ANIMAL: 'animalFetch'
+    ANIMAL: 'animalFetch',
+    PICTURE: 'pictureFetch',
+    BREED: 'breedFetch',
+    COLOR: 'colorFetch',
+    CONTACT: 'contactFetch',
+    LOCATION: 'locationFetch',
+    PATTERN: 'patternFetch',
+    SPECIES: 'speciesFetch',
+    STATUS: 'statusFetch'
 };
 
-let currentAnimalJob = null;
+let currentAnimalJob = null,
+    currentPictureJob = null,
+    currentBreedJob = null,
+    currentColorJob = null,
+    currentContactJob = null,
+    currentLocationJob = null,
+    currentPatternJob = null,
+    currentSpeciesJob = null,
+    currentStatusJob = null;
+// endregion
 
 // region Shared Function - Run Node Scheduler
 function runNodeScheduler({
@@ -160,7 +190,7 @@ function runNodeScheduler({
 })
 {
     return new Promise((resolve) => {
-        // if (process.env.IS_LOCAL === 'true')
+        // if (isLocal())
         // {
         //     resolve('Node Scheduler is not usable on Dev environment');
         //     return;
@@ -183,8 +213,8 @@ function runNodeScheduler({
             }
 
             // Check for next reminder time
-            let duration = process.env.IS_LOCAL === 'true' ? (60 * minuteInterval) : (86400 * dayInterval),
-                errDuration = process.env.IS_LOCAL === 'true' ? (60 * minuteInterval) : 86400;
+            let duration = isLocal() ? (60 * minuteInterval) : (86400 * dayInterval),
+                errDuration = isLocal() ? (60 * minuteInterval) : 86400;
 
             getSchedulerConfig(jobName)
                 .then((config) => {
@@ -194,11 +224,18 @@ function runNodeScheduler({
                             runTime = isInPast ? (moment().unix() + 1) : config['nextRunAt'];
 
                         if (isInPast) updateSchedulerConfig(config.id, runTime + duration);
-                        jobFunction(runTime, config.id, duration, isInPast);
+
+                        // Run job
+                        jobFunction({
+                            scheduleTime: runTime,
+                            configItemID: config.id,
+                            duration,
+                            alreadyUpdateTime: isInPast
+                        });
 
                         let returnMsg = isInPast ? `(${jobName}) Scheduler will be run now!` : `(${jobName}) Scheduler will be run in ${moment.unix(runTime).diff(moment(), 'minutes')} minutes`;
 
-                        if (process.env.IS_LOCAL === 'true') console.log(returnMsg);
+                        if (isLocal()) console.log(returnMsg);
                         resolve(returnMsg);
                     }
                     else
@@ -209,9 +246,11 @@ function runNodeScheduler({
                                 if (newConfig)
                                 {
                                     let returnMsg = `(${jobName}) Scheduler will be run in ${moment.unix(nextRunAt).diff(moment(), 'minutes')} minutes`;
-                                    jobFunction(nextRunAt);
 
-                                    if (process.env.IS_LOCAL === 'true') console.log(returnMsg);
+                                    // Run job
+                                    jobFunction({ scheduleTime: nextRunAt });
+
+                                    if (isLocal()) console.log(returnMsg);
                                     resolve(returnMsg);
                                 }
                                 else
@@ -219,9 +258,10 @@ function runNodeScheduler({
                                     let runTime = moment().unix() + errDuration,
                                         returnMsg = `(${jobName}) Scheduler will be run in ${moment.unix(runTime).diff(moment(), 'minutes')} minutes`;
 
-                                    jobFunction(runTime);
+                                    // Run job
+                                    jobFunction({ scheduleTime: runTime });
 
-                                    if (process.env.IS_LOCAL === 'true') console.log(returnMsg);
+                                    if (isLocal()) console.log(returnMsg);
                                     resolve(returnMsg);
                                 }
                             });
@@ -251,24 +291,57 @@ function checkJobIsRunning(jobName = '')
 }
 // endregion
 
-// region SCHEDULER - Animals
-export function runAnimalScheduler()
+// region SCHEDULER Function
+export function runJobScheduler(jobName, nodeSchedulerInstance, apiLink = '', dbAttributeNames = [], tableName = '')
 {
+    let minuteInterval = process.env.ANIMAL_JOB_INTERVAL_MINUTES || 5,
+        dayInterval = process.env.ANIMAL_JOB_INTERVAL_DAYS || 1;
+
     return runNodeScheduler({
-        jobName: jobNames.ANIMAL,
-        nodeSchedulerInstance: currentAnimalJob,
-        minuteInterval: process.env.ANIMAL_JOB_INTERVAL_MINUTES || 5,
-        dayInterval: process.env.ANIMAL_JOB_INTERVAL_DAYS || 1,
-        jobFunction: (a, b, c, d) => scheduleAnimalFetch(a, b, c, d)
+        jobName,
+        nodeSchedulerInstance,
+        minuteInterval,
+        dayInterval,
+        jobFunction: ({
+            scheduleTime,
+            configItemID,
+            duration,
+            alreadyUpdateTime
+        }) => scheduleFetchJob({
+            jobName,
+            nodeSchedulerInstance,
+            scheduleTime,
+            configItemID,
+            duration,
+            alreadyUpdateTime,
+            minuteInterval,
+            dayInterval,
+            apiLink,
+            dbAttributeNames,
+            tableName
+        })
     });
 }
 
-function scheduleAnimalFetch(scheduleTime, configItemID = null, duration = 86400 * 2, alreadyUpdateTime = false)
+function scheduleFetchJob({
+    jobName,
+    nodeSchedulerInstance,
+    scheduleTime,
+    configItemID,
+    duration,
+    alreadyUpdateTime,
+    minuteInterval,
+    dayInterval,
+
+    apiLink,
+    tableName = '',
+    dbAttributeNames = []
+})
 {
-    currentAnimalJob = nodeScheduler.scheduleJob(moment.unix(scheduleTime).toDate(), function () {
+    nodeSchedulerInstance = nodeScheduler.scheduleJob(moment.unix(scheduleTime).toDate(), function () {
         // Configure the job
         const task = new AsyncTask(
-            jobNames.ANIMAL,
+            jobName,
             () => {
                 // Update next reminder time
                 if (configItemID && !alreadyUpdateTime)
@@ -277,28 +350,109 @@ function scheduleAnimalFetch(scheduleTime, configItemID = null, duration = 86400
                     updateSchedulerConfig(configItemID, nextRunAt);
                 }
 
-                // TODO: Start calling List Animal API
+                // TODO: Start calling API
+                // each API should return metadata with the number of total pages "lastPage"
                 return new Promise((bigResolve, bigReject) => {
                     // Record time
                     const startedAt = moment().unix();
 
-                    // Execute task
-                    setTimeout(() => {
-                        sendSlackMessage('Done', `Fake data fetch completed, took ${moment().unix() - startedAt}s`, true);
-                        bigResolve(true);
-                    }, 3000);
+                    // Step 1: Call the first API with pageSize=0 to get metadata from it
+                    let pageSize = 250;
+                    apiWrapper({ link: `${apiLink}?limit=0`, functionName: `[API] ${jobName}` })
+                        .then((metaResult) => {
+                            let totalPages = Math.ceil(metaResult.totalResult / pageSize),
+                                pageArr = Array.from(Array(totalPages), (_, x) => x + 1);
+
+                            // Step 2: Call APIs sequentially
+                            Promise
+                                .mapSeries(pageArr, (page) => new Promise((apiResolve) => {
+                                    // Delay API execution time by 1s to avoid access block from Rescue Groups
+                                    setTimeout(() => {
+                                        apiWrapper({
+                                            link: `${apiLink}?page=${page}&limit=${pageSize}`,
+                                            functionName: `[API] ${jobName}`,
+                                            noLogs: true
+                                        })
+                                            .then((apiResult) => {
+                                                // Generate recordValueList
+                                                let recordValueList = apiResult.data.map((item) => {
+                                                    // Add the ID in
+                                                    let recordValues = `(${Number(item.id)}`;
+
+                                                    // Add other attributes in, must be in order of the items in dbAttributeNames
+                                                    // If any value missing, put in NULL
+                                                    // Need to standardize the attribute returned by API first since we have some minor differences in capitalization
+                                                    dbAttributeNames.forEach((key) => {
+                                                        let attributeValue = item['attributes'][Object.keys(item['attributes']).find((k) => k.toLowerCase() === key.toLowerCase())];
+
+                                                        if (attributeValue)
+                                                        {
+                                                            recordValues += `, ${typeof attributeValue === 'string' ? ('"' + attributeValue + '"') : Number(attributeValue)}`;
+                                                        }
+                                                        else recordValues += `, NULL`;
+                                                    });
+
+                                                    // Add closing parenthesis
+                                                    recordValues += ')';
+
+                                                    // Return
+                                                    return recordValues;
+                                                });
+
+                                                // Resolve API call
+                                                apiResolve(recordValueList.join(',\n'));
+                                            })
+                                            .catch((error) => {
+                                                sendSlackMessage(`[API Error] ${jobName}`, error);
+                                                apiResolve([]);
+                                            });
+                                    }, 2000);
+                                }))
+                                .then((bigRecordValueList) => {
+                                    // Call INSERT statement
+                                    let sqlStatement =
+                                        `INSERT INTO ${tableName} (id, ${dbAttributeNames.join(', ')})\n` +
+                                        'VALUES\n' +
+                                        bigRecordValueList.join(',\n') +
+                                        '\nON DUPLICATE KEY UPDATE\n' +
+                                        dbAttributeNames.map((item) => (item + ' = VALUES(' + item + ')'));
+
+                                    // console.log(sqlStatement);
+
+                                    const connection = getMySQLConnection();
+                                    connection.query(sqlStatement, (error) => {
+                                        if (error) sendSlackMessage(`[SQL Error] ${jobName}`, error.sqlMessage);
+                                        connection.end();
+                                    });
+
+                                    // Notify via Slack
+                                    sendSlackMessage('Done', `[Job Completed] ${jobName}, took ${moment().unix() - startedAt}s`, true);
+                                    bigResolve(true);
+                                })
+                                .catch((error) => bigReject(`[SCHEDULER STEP 2]\n\n${error}`));
+                        })
+                        .catch((error) => bigReject(`[SCHEDULER STEP 1]\n\n${error}`));
                 });
             },
-            (error) => sendSlackMessage('Scheduler Error', error.message + '\n\n' + JSON.stringify(error))
+            (error) => sendSlackMessage(`[Job Error] ${jobName}`, typeof error === 'string' ? error : (error.message + '\n\n' + JSON.stringify(error)))
         );
 
         const job = new SimpleIntervalJob(
-            Object.assign({ runImmediately: true }, process.env.IS_LOCAL === 'true' ? { minutes: process.env.ANIMAL_JOB_INTERVAL_MINUTES || 5 } : { days: process.env.ANIMAL_JOB_INTERVAL_DAYS || 1 }),
+            Object.assign({ runImmediately: true }, isLocal() ? { minutes: minuteInterval } : { days: dayInterval }),
             task,
-            jobNames.ANIMAL
+            jobName
         );
 
         scheduler.addSimpleIntervalJob(job);
     });
 }
 // endregion
+
+// region POST - Start Scheduler
+secondHandHoundsRouter.post('/startScheduler', (request, response) => {
+    runJobScheduler(jobNames.BREED, currentBreedJob, '/animals/breeds', ['name'], 'Breeds')
+        .then((returnMessage) => Success(response, returnMessage));
+});
+// endregion
+
+export { secondHandHoundsRouter };

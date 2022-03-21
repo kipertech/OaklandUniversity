@@ -9,7 +9,7 @@ import cors from 'cors';
 import indexRouter from './routes';
 import profTomlinRouter from "./routes/route_profTomlin";
 import profChoRouter from "./routes/route_profCho";
-import { secondHandHoundsRouter } from "./routes/route_secondHandHounds";
+import { secondHandHoundsRouter } from "./schedulers";
 
 let app = express();
 

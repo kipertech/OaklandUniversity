@@ -1,9 +1,19 @@
+import fetch from 'node-fetch';
+
 import { isObject } from './util_helpers';
 
 const GLOBAL = require('../configs/config_secondHandHounds');
 
 // region API Wrapper
-export function apiWrapper(link, method = 'POST', functionName = '', body = null, completeFunc = () => {}, customAuthorizationKey = null)
+export function apiWrapper({
+    link,
+    method = 'GET',
+    functionName = '',
+    body = null,
+    completeFunc = () => {},
+    customAuthorizationKey = null,
+    noLogs = false
+})
 {
     return new Promise((resolve, reject) => {
         let hasPagination = link.toLowerCase().includes('page') || link.toLowerCase().includes('limit');
@@ -12,8 +22,7 @@ export function apiWrapper(link, method = 'POST', functionName = '', body = null
             method: method,
             headers: {
                 'Content-Type': 'application/vnd.api+json',
-                'Accept': 'application/json',
-                'Authorization': 'Bearer ' + (customAuthorizationKey || process.env.SHH_API_KEY)
+                'Authorization': customAuthorizationKey || process.env.SHH_API_KEY
             },
             body
         })
@@ -22,7 +31,7 @@ export function apiWrapper(link, method = 'POST', functionName = '', body = null
             {
                 if (!checkErrorExist(response))
                 {
-                    console.log(`[SUCCESS] ${functionName.toUpperCase()}`, response);
+                    if (!noLogs) console.log(`[SUCCESS] ${functionName.toUpperCase()}`, response);
                     completeFunc(response);
                     resolve(
                         hasPagination ?
@@ -39,13 +48,13 @@ export function apiWrapper(link, method = 'POST', functionName = '', body = null
                 }
                 else
                 {
-                    if (process.env.IS_LOCAL === 'true') console.log(`[FAILED] ${functionName.toUpperCase()}`, response);
+                    if (process.env.IS_LOCAL === 'true' && !noLogs) console.log(`[FAILED] ${functionName.toUpperCase()}`, response);
                     reject(convertError(response.errors || response.error));
                 }
             })
             .catch((error) =>
             {
-                if (process.env.IS_LOCAL === 'true') console.log(`[FAILED] ${functionName.toUpperCase()}`, error);
+                if (process.env.IS_LOCAL === 'true' && !noLogs) console.log(`[FAILED] ${functionName.toUpperCase()}`, error);
                 reject(error.message);
             });
     });
@@ -62,6 +71,11 @@ export function checkErrorExist(responseObj)
 // region Convert Error Object in Response to Readable Format
 export function convertError(errorObj)
 {
+    if (Array.isArray(errorObj))
+    {
+        let errorData = errorObj[0];
+        return(`(${errorData.status}) ${errorData.title}\n${errorData.detail}`);
+    }
     if (isObject(errorObj))
     {
         // Extract error data
