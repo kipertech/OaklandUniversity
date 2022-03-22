@@ -18,6 +18,9 @@ import { Promise } from "bluebird";
 import { apiWrapper } from "../utils/util_api_helpers";
 import { Abort, isObject, Success } from "../utils";
 import { writeFile } from "fs/promises";
+import { sloppyAuthenticate } from "../middlewares/middleware_authentication";
+import ExcelJS from "exceljs";
+import codeFile from "../../tempData/profTomlin_combinedTariff_2Digits.json";
 
 // Define scheduler
 const scheduler = new ToadScheduler();
@@ -419,11 +422,11 @@ function generateImportStatement({ jobName, apiLink, tableName, dbAttributeNames
                             {
                                 if (error) sendSlackMessage(`[SQL Error] ${jobName}`, error.sqlMessage);
                                 connection.end();
-                            });
 
-                            // Notify via Slack
-                            sendSlackMessage('Done', `[Job Completed] ${jobName}, took ${moment().unix() - startedAt}s`, true);
-                            bigResolve(true);
+                                // Notify via Slack
+                                sendSlackMessage('Done', `[Job Completed] ${jobName}, took ${moment().unix() - startedAt}s`, true);
+                                bigResolve(true);
+                            });
                         };
 
                         // Write to file for review
@@ -523,25 +526,97 @@ function scheduleFetchJob({
 }
 // endregion
 
-// region POST - Start Scheduler
-secondHandHoundsRouter.post('/oneTimeImport', (request, response) =>
-{
-    // Sloppy authentication
-    let token = request.header('x-auth-token');
-    if (!token)
-    {
-        Abort(response, 'Token is required');
-        return;
-    }
-    else
-    {
-        if (token !== process.env.TOKEN)
-        {
-            Abort(response, 'Invalid token');
-            return;
-        }
-    }
+// region Function - Import Contacts from Excel
+secondHandHoundsRouter.post('/importContacts', sloppyAuthenticate, (request, response) => {
+    // Record time
+    const startedAt = moment().unix();
 
+    // Open Excel file
+    const workbook = new ExcelJS.Workbook();
+    workbook.xlsx.readFile('D:\\Projects\\OU\\OaklandUniversity\\data\\SecondHandHounds\\data_contacts_full_20220321.xlsx')
+        .then((workbookContent) => {
+            const worksheet = workbookContent.worksheets[0];
+
+            let sqlValues = [];
+
+            // Go thru all contacts
+            worksheet.eachRow((row, rowNumber) => {
+                if (rowNumber > 1)
+                {
+                    let rowValues = row.values,
+                        id = Number(rowValues[1]?.toString().trim()),
+                        city = rowValues[2]?.trim(),
+                        email = rowValues[3]?.toString().trim().toLowerCase(),
+                        name = rowValues[4]?.trim(), // Need to split to get Preferred Name, First Name and Last Name
+                        state = rowValues[5]?.trim().toUpperCase();
+
+                    // Start splitting the name
+                    // Step 1: Check for (no name)
+                    let isNoName = (name === '(no name)' || name === '*,*');
+
+                    // Step 2: Split by comma to get the 2 parts
+                    let namePart1 = name.split(',')[0]?.trim(),
+                        lastName = name.split(',')[1]?.trim()?.replaceAll('"', '');
+
+                    // Step 3: Check the first part for preferred part, which is wrapped inside parenthesis
+                    let openingIndex = namePart1.indexOf('('),
+                        closingIndex = namePart1.indexOf(')'),
+                        preferredName = '',
+                        firstName = '';
+
+                    if (openingIndex > -1)
+                    {
+                        preferredName = namePart1.substring(openingIndex + 1, closingIndex)?.replaceAll('"', '');
+                        firstName = namePart1.substring(closingIndex + 1)?.replaceAll('"', '');
+                    }
+                    else firstName = namePart1?.replaceAll('"', '');
+
+                    // Generate SQL values statement
+                    sqlValues.push(`(${id}, "${email || ''}", "${isNoName ? '' : (firstName)}", "${isNoName ? '' : lastName}", "${isNoName ? '' : preferredName}", "${city || ''}", "${state || ''}")`);
+                }
+            });
+
+            // Generate insert statement
+            let attributeList = ['id', 'email', 'firstName', 'lastName', 'name', 'city', 'state'],
+                sqlStatement =
+                `INSERT INTO Contacts (${attributeList.join(', ')})\n` +
+                'VALUES\n' +
+                sqlValues.join(',\n') +
+                '\nON DUPLICATE KEY UPDATE\n' +
+                attributeList.map((item) => (item + ' = VALUES(' + item + ')')).join(',\n');
+
+            // Invoke query statement to DB
+            let invokeDBWrite = function()
+            {
+                const connection = getMySQLConnection();
+                connection.query(sqlStatement, (error) =>
+                {
+                    if (error) sendSlackMessage(`[SQL Error] Import Contacts`, error.sqlMessage);
+                    connection.end();
+                });
+
+                // Notify via Slack
+                sendSlackMessage('Done', `[Job Completed] Import Contacts, took ${moment().unix() - startedAt}s`, true);
+
+                // Finish
+                Success(response, 'Import completed');
+            };
+
+            // Write to file for review
+            writeFile(`./tempData/secondHandHounds_Contacts.sql`, sqlStatement)
+                .then(() => invokeDBWrite())
+                .catch((writeError) => {
+                    invokeDBWrite();
+                    sendSlackMessage('[Write File Error]', writeError.message);
+                });
+        })
+        .catch((error) => Abort(response, 'Failed to read file', 500, error.message));
+});
+// endregion
+
+// region POST - Start Scheduler
+secondHandHoundsRouter.post('/oneTimeImport', sloppyAuthenticate, (request, response) =>
+{
     // Response back first and execute APIs later
     Success(response, 'Jobs executed, you will be notified via Slack');
 

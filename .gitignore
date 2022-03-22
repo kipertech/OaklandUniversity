@@ -31,6 +31,7 @@ yarn-error.log*
 !.elasticbeanstalk/*.global.yml
 
 # IntelliJ SDK Files
+./data
 rebar/*
 .idea/
 .env
@@ -39,3 +40,5 @@ tempData/profTomlin_combinedNaics_1a.json
 tempData/profTomlin_combinedNaics_2.json
 tempData/profTomlin_combinedNaics_2a.json
 tempData/profTomlin_combinedNaics_3.json
+data/
+tempData/secondHandHounds_Contacts.sql
