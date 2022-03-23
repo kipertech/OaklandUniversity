@@ -13,14 +13,17 @@ import nodeScheduler from 'node-schedule';
 import moment from 'moment-timezone';
 import MySQL from 'mysql';
 import { Promise } from "bluebird";
+import ExcelJS from "exceljs";
 
 // Helpers
-import { apiWrapper } from "../utils/util_api_helpers";
-import { Abort, isObject, Success } from "../utils";
+import { apiWrapper, apiWrapperXML } from "../utils/util_api_helpers";
+import {
+    Abort,
+    isObject,
+    Success
+} from "../utils";
 import { writeFile } from "fs/promises";
 import { sloppyAuthenticate } from "../middlewares/middleware_authentication";
-import ExcelJS from "exceljs";
-import codeFile from "../../tempData/profTomlin_combinedTariff_2Digits.json";
 
 // Define scheduler
 const scheduler = new ToadScheduler();
@@ -527,7 +530,19 @@ function scheduleFetchJob({
 // endregion
 
 // region Function - Import Contacts from Excel
-secondHandHoundsRouter.post('/importContacts', sloppyAuthenticate, (request, response) => {
+secondHandHoundsRouter.post('/importContactsXML', sloppyAuthenticate, (request, response) => {
+    apiWrapperXML({ type: 'contacts', viewID: '550520', tagName: 'Contact_' })
+        .then(() => Success(response, 'Successfully imported Contacts data'))
+        .catch((error) => Abort(response, 'Failed to import Contacts data', error));
+});
+
+secondHandHoundsRouter.post('/importFosterAdopterXML', sloppyAuthenticate, (request, response) => {
+    apiWrapperXML({ type: 'animals', viewID: '550550', tagName: 'Animal_' })
+        .then(() => Success(response, 'Successfully imported Foster and Adopter data'))
+        .catch((error) => Abort(response, 'Failed to import Foster and Adopter data', error));
+});
+
+secondHandHoundsRouter.post('/importContactsExcel', sloppyAuthenticate, (request, response) => {
     // Record time
     const startedAt = moment().unix();
 

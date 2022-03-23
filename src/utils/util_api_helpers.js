@@ -1,8 +1,49 @@
 import fetch from 'node-fetch';
+import xml2js from 'xml2js';
+import { writeFile } from "fs/promises";
 
 import { isObject } from './util_helpers';
+import { Abort, Success } from "./util_response_helpers";
 
 const GLOBAL = require('../configs/config_secondHandHounds');
+
+// region API Wrapper - XML Returned
+export function apiWrapperXML({
+    type = 'contacts',
+    viewID = '550520',
+    tagName = 'Contact_'
+})
+{
+    return new Promise((resolve, reject) => {
+        fetch(`https://rescuegroups.org/manage/data/get?type=${type}&viewID=${viewID}&viewType=Custom&Export=ExportDataXLS`, {
+            method: 'GET',
+            headers: { 'Cookie': process.env.SHH_COOKIE }
+        })
+            .then((response) => {
+                if (response.status === 200)
+                {
+                    return response.text();
+                }
+                else return({ error: 'Status Code: ' + response.status });
+            })
+            .then((response) => {
+                // Convert into JSON format
+                xml2js
+                    .parseStringPromise(response, {
+                        explicitArray: false,
+                        tagNameProcessors: [(name) => name?.replaceAll(tagName, '')]
+                    })
+                    .then((result) => {
+                        writeFile(`./tempData/secondHandHounds_${type.toUpperCase()}_XML.json`, JSON.stringify(result, null, 4))
+                            .then(() => resolve('Done'))
+                            .catch((writeError) => reject(writeError.message));
+                    })
+                    .catch((parseError) => reject(parseError.message));
+            })
+            .catch((error) => reject(error.message));
+    });
+}
+// endregion
 
 // region API Wrapper
 export function apiWrapper({
