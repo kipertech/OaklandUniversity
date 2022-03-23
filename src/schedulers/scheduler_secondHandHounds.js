@@ -295,6 +295,12 @@ function checkJobIsRunning(jobName = '')
 // region Function - Generate SQL Statement and Import to DB
 function parseAttributeValue(attributeValue)
 {
+    // Check null and undefined
+    if (attributeValue === '' || attributeValue === null || attributeValue === undefined)
+    {
+        return('NULL');
+    }
+
     // Check arrays and objects
     if (Array.isArray(attributeValue))
     {
@@ -312,7 +318,11 @@ function parseAttributeValue(attributeValue)
     {
         case "string":
         {
-            returnValue = '"' + attributeValue.replaceAll('"', `'`) + '"';
+            if (isNaN(attributeValue))
+            {
+                returnValue = '"' + attributeValue.replaceAll('"', `'`) + '"';
+            }
+            else returnValue = Number(attributeValue);
             break;
         }
         case "number":
@@ -433,12 +443,16 @@ function generateImportStatement({ jobName, apiLink, tableName, dbAttributeNames
                         };
 
                         // Write to file for review
-                        writeFile(`./tempData/secondHandHounds_${tableName}.sql`, sqlStatement)
-                            .then(() => invokeDBWrite())
-                            .catch((writeError) => {
-                                invokeDBWrite();
-                                sendSlackMessage('[Write File Error]', writeError.message);
-                            });
+                        if (isLocal())
+                        {
+                            writeFile(`./tempData/secondHandHounds_${tableName}.sql`, sqlStatement)
+                                .then(() => invokeDBWrite())
+                                .catch((writeError) => {
+                                    invokeDBWrite();
+                                    sendSlackMessage('[Write File Error]', writeError.message);
+                                });
+                        }
+                        else invokeDBWrite();
                     })
                     .catch((error) => bigReject(`[SCHEDULER STEP 2]\n\n${error}`));
             })
@@ -529,103 +543,251 @@ function scheduleFetchJob({
 }
 // endregion
 
-// region Function - Import Contacts from Excel
-secondHandHoundsRouter.post('/importContactsXML', sloppyAuthenticate, (request, response) => {
-    apiWrapperXML({ type: 'contacts', viewID: '550520', tagName: 'Contact_' })
-        .then(() => Success(response, 'Successfully imported Contacts data'))
-        .catch((error) => Abort(response, 'Failed to import Contacts data', error));
-});
-
-secondHandHoundsRouter.post('/importFosterAdopterXML', sloppyAuthenticate, (request, response) => {
-    apiWrapperXML({ type: 'animals', viewID: '550550', tagName: 'Animal_' })
-        .then(() => Success(response, 'Successfully imported Foster and Adopter data'))
-        .catch((error) => Abort(response, 'Failed to import Foster and Adopter data', error));
-});
-
-secondHandHoundsRouter.post('/importContactsExcel', sloppyAuthenticate, (request, response) => {
-    // Record time
+// region Function - Import Contacts from XML
+function importContactsFromXML()
+{
+    // Log time
     const startedAt = moment().unix();
 
-    // Open Excel file
-    const workbook = new ExcelJS.Workbook();
-    workbook.xlsx.readFile('D:\\Projects\\OU\\OaklandUniversity\\data\\SecondHandHounds\\data_contacts_full_20220321.xlsx')
-        .then((workbookContent) => {
-            const worksheet = workbookContent.worksheets[0];
+    // Fetch data
+    apiWrapperXML({ type: 'contacts', viewID: '550520', tagName: 'Contact_' })
+        .then((json) => {
+            // Mapping attributes to their correct DB names
+            let attributeMap = {
+                "id": 'id',
+                "Email": 'email',
+                "Firstname": 'firstName',
+                "Lastname": 'lastName',
+                "PhoneCell": 'phoneCell',
+                "City": 'city',
+                "State": 'state',
 
-            let sqlValues = [];
+                "Active": 'isActive',
+                "Address": 'address',
+                "Country": 'country',
+                "Zipcode": 'zip',
+                "Class": 'type'
+            };
 
-            // Go thru all contacts
-            worksheet.eachRow((row, rowNumber) => {
-                if (rowNumber > 1)
-                {
-                    let rowValues = row.values,
-                        id = Number(rowValues[1]?.toString().trim()),
-                        city = rowValues[2]?.trim(),
-                        email = rowValues[3]?.toString().trim().toLowerCase(),
-                        name = rowValues[4]?.trim(), // Need to split to get Preferred Name, First Name and Last Name
-                        state = rowValues[5]?.trim().toUpperCase();
+            // Go over all items in the JSON array and parse them to the correct format we need
+            let sqlValues = [],
+                keyList = Object.keys(attributeMap),
+                dbAttributeList = keyList.map((key) => attributeMap[key]);
 
-                    // Start splitting the name
-                    // Step 1: Check for (no name)
-                    let isNoName = (name === '(no name)' || name === '*,*');
-
-                    // Step 2: Split by comma to get the 2 parts
-                    let namePart1 = name.split(',')[0]?.trim(),
-                        lastName = name.split(',')[1]?.trim()?.replaceAll('"', '');
-
-                    // Step 3: Check the first part for preferred part, which is wrapped inside parenthesis
-                    let openingIndex = namePart1.indexOf('('),
-                        closingIndex = namePart1.indexOf(')'),
-                        preferredName = '',
-                        firstName = '';
-
-                    if (openingIndex > -1)
-                    {
-                        preferredName = namePart1.substring(openingIndex + 1, closingIndex)?.replaceAll('"', '');
-                        firstName = namePart1.substring(closingIndex + 1)?.replaceAll('"', '');
-                    }
-                    else firstName = namePart1?.replaceAll('"', '');
-
-                    // Generate SQL values statement
-                    sqlValues.push(`(${id}, "${email || ''}", "${isNoName ? '' : (firstName)}", "${isNoName ? '' : lastName}", "${isNoName ? '' : preferredName}", "${city || ''}", "${state || ''}")`);
-                }
+            json.forEach((item) => {
+                sqlValues.push(
+                    '(' +
+                    keyList.map((attributeKey) => {
+                        if (attributeKey === 'Active')
+                        {
+                            return(item[attributeKey].toLowerCase() === 'yes' ? '1' : '0');
+                        }
+                        else return(parseAttributeValue(item[attributeKey]));
+                    }).join(', ') +
+                    ')'
+                );
             });
 
-            // Generate insert statement
-            let attributeList = ['id', 'email', 'firstName', 'lastName', 'name', 'city', 'state'],
-                sqlStatement =
-                `INSERT INTO Contacts (${attributeList.join(', ')})\n` +
+            // Generate SQL statement
+            let sqlStatement =
+                `INSERT INTO Contacts (${dbAttributeList.join(', ')})\n` +
                 'VALUES\n' +
                 sqlValues.join(',\n') +
                 '\nON DUPLICATE KEY UPDATE\n' +
-                attributeList.map((item) => (item + ' = VALUES(' + item + ')')).join(',\n');
+                dbAttributeList.map((item) => (item + ' = VALUES(' + item + ')')).join(',\n');
 
             // Invoke query statement to DB
             let invokeDBWrite = function()
             {
                 const connection = getMySQLConnection();
-                connection.query(sqlStatement, (error) =>
-                {
-                    if (error) sendSlackMessage(`[SQL Error] Import Contacts`, error.sqlMessage);
+                connection.query(sqlStatement, (error) => {
+                    if (error) sendSlackMessage(`[SQL Error] Import Contacts From XML`, error.sqlMessage);
                     connection.end();
+
+                    // Notify via Slack
+                    sendSlackMessage('Done', `[Job Completed] Import Contacts From XML, took ${moment().unix() - startedAt}s`, true);
                 });
-
-                // Notify via Slack
-                sendSlackMessage('Done', `[Job Completed] Import Contacts, took ${moment().unix() - startedAt}s`, true);
-
-                // Finish
-                Success(response, 'Import completed');
             };
 
             // Write to file for review
-            writeFile(`./tempData/secondHandHounds_Contacts.sql`, sqlStatement)
-                .then(() => invokeDBWrite())
-                .catch((writeError) => {
-                    invokeDBWrite();
-                    sendSlackMessage('[Write File Error]', writeError.message);
-                });
+            if (isLocal())
+            {
+                writeFile(`./tempData/secondHandHounds_Contacts.sql`, sqlStatement)
+                    .then(() => invokeDBWrite())
+                    .catch((writeError) => {
+                        invokeDBWrite();
+                        sendSlackMessage('[Write File Error]', writeError.message);
+                    });
+            }
+            else invokeDBWrite();
         })
-        .catch((error) => Abort(response, 'Failed to read file', 500, error.message));
+        .catch((error) => sendSlackMessage('[Write File Error]', error.message));
+}
+// endregion
+
+// region Function - Import Foster/Adopter ID from XML
+function importFosterAdopterFromXML()
+{
+    // Log time
+    const startedAt = moment().unix();
+
+    // Fetch data
+    apiWrapperXML({ type: 'animals', viewID: '550550', tagName: 'Animal_' })
+        .then((json) => {
+            // Map json attribute names with DB attribute names
+            let attributeMap = {
+                "id": 'id',
+                "Adopter_ContactID": 'adopterID',
+                "Foster_ContactID": 'fosterID'
+            };
+
+            // Go over all items in the JSON array and parse them to the correct format we need
+            let sqlValues = [],
+                keyList = Object.keys(attributeMap),
+                dbAttributeList = keyList.map((key) => attributeMap[key]);
+
+            json.forEach((item) => sqlValues.push('(' + keyList.map((attributeKey) => parseAttributeValue(item[attributeKey])).join(', ') + ')'));
+
+            // Generate SQL statement
+            let sqlStatement =
+                `INSERT INTO Animals (${dbAttributeList.join(', ')})\n` +
+                'VALUES\n' +
+                sqlValues.join(',\n') +
+                '\nON DUPLICATE KEY UPDATE\n' +
+                dbAttributeList.map((item) => (item + ' = VALUES(' + item + ')')).join(',\n');
+
+            // Invoke query statement to DB
+            let invokeDBWrite = function()
+            {
+                const connection = getMySQLConnection();
+                connection.query(sqlStatement, (error) => {
+                    if (error) sendSlackMessage(`[SQL Error] Import Foster/Adopter From XML`, error.sqlMessage);
+                    connection.end();
+
+                    // Notify via Slack
+                    sendSlackMessage('Done', `[Job Completed] Import Foster/Adopter From XML, took ${moment().unix() - startedAt}s`, true);
+                });
+            };
+
+            // Write to file for review
+            if (isLocal())
+            {
+                writeFile(`./tempData/secondHandHounds_FosterAdopter.sql`, sqlStatement)
+                    .then(() => invokeDBWrite())
+                    .catch((writeError) => {
+                        invokeDBWrite();
+                        sendSlackMessage('[Write File Error]', writeError.message);
+                    });
+            }
+            else invokeDBWrite();
+        })
+        .catch((error) => sendSlackMessage('[Write File Error]', error.message));
+}
+// endregion
+
+// region Function - Import Origin/Received Date from XML
+function importOriginReceivedDateFromXML()
+{
+    // Load mapping file
+    const originMapping = require('../../data/SecondHandHounds/originMapping.json');
+
+    // Log time
+    const startedAt = moment().unix();
+
+    // Fetch data
+    apiWrapperXML({ type: 'animals', viewID: '550661', tagName: 'Animal_' })
+        .then((json) => {
+            // Map json attribute names with DB attribute names
+            let attributeMap = {
+                "id": 'id',
+                "ReceivedDate": 'receivedDate',
+                "Origin": 'originRaw'
+            };
+
+            // Go over all items in the JSON array and parse them to the correct format we need
+            let sqlValues = [],
+                keyList = Object.keys(attributeMap),
+                dbAttributeList = keyList.map((key) => attributeMap[key]).concat('originParsed');
+
+            json.forEach((item) => {
+                let originParsed = originMapping.find((origin) => origin['Origin'].toLowerCase() === item['Origin']?.toLowerCase())?.['Category'] || 'Other';
+
+                sqlValues.push(
+                    '(' +
+                    keyList
+                        .map((attributeKey) => {
+                            if (attributeKey === 'ReceivedDate')
+                            {
+                                return(item[attributeKey]?.trim() ? ('"' + moment(item[attributeKey], 'MM/DD/YYYY').format('YYYY-MM-DD') + '"') : 'NULL');
+                            }
+                            else return parseAttributeValue(item[attributeKey]);
+                        })
+                        .concat('"' + originParsed.replaceAll('\n', ' ').replaceAll('"', '') + '"')
+                        .join(', ') +
+                    ')'
+                );
+            });
+
+            // Generate SQL statement
+            let sqlStatement =
+                `INSERT INTO Animals (${dbAttributeList.join(', ')})\n` +
+                'VALUES\n' +
+                sqlValues.join(',\n') +
+                '\nON DUPLICATE KEY UPDATE\n' +
+                dbAttributeList.map((item) => (item + ' = VALUES(' + item + ')')).join(',\n');
+
+            // Invoke query statement to DB
+            let invokeDBWrite = function()
+            {
+                const connection = getMySQLConnection();
+                connection.query(sqlStatement, (error) => {
+                    if (error) sendSlackMessage(`[SQL Error] Import Origin/Received Date From XML`, error.sqlMessage);
+                    connection.end();
+
+                    // Notify via Slack
+                    sendSlackMessage('Done', `[Job Completed] Import Origin/Received Date From XML, took ${moment().unix() - startedAt}s`, true);
+                });
+            };
+
+            // Write to file for review
+            if (isLocal())
+            {
+                writeFile(`./tempData/secondHandHounds_OriginReceivedDate.sql`, sqlStatement)
+                    .then(() => invokeDBWrite())
+                    .catch((writeError) => {
+                        invokeDBWrite();
+                        sendSlackMessage('[Write File Error]', writeError.message);
+                    });
+            }
+            else invokeDBWrite();
+        })
+        .catch((error) => sendSlackMessage('[Write File Error]', error.message));
+}
+// endregion
+
+// region POST - Import from XML
+secondHandHoundsRouter.post('/importContactsXML', sloppyAuthenticate, (request, response) => {
+    // Call function
+    importContactsFromXML();
+
+    // Response first, notify result over Slack later
+    Success(response, 'Import Contacts from XML initiated, result will be notified via Slack');
+});
+
+secondHandHoundsRouter.post('/importFosterAdopterXML', sloppyAuthenticate, (request, response) => {
+    // Call function
+    importFosterAdopterFromXML();
+
+    // Response first, notify result over Slack later
+    Success(response, 'Import Foster/Adopter from XML initiated, result will be notified via Slack');
+});
+
+secondHandHoundsRouter.post('/importOriginReceivedDateXML', sloppyAuthenticate, (request, response) => {
+    // Call function
+    importOriginReceivedDateFromXML();
+
+    // Response first, notify result over Slack later
+    Success(response, 'Import Origin/Received Date from XML initiated, result will be notified via Slack');
 });
 // endregion
 

@@ -34,9 +34,15 @@ export function apiWrapperXML({
                         tagNameProcessors: [(name) => name?.replaceAll(tagName, '')]
                     })
                     .then((result) => {
-                        writeFile(`./tempData/secondHandHounds_${type.toUpperCase()}_XML.json`, JSON.stringify(result, null, 4))
-                            .then(() => resolve('Done'))
-                            .catch((writeError) => reject(writeError.message));
+                        let jsonResult = result[type]?.[type];
+
+                        if (process.env.IS_LOCAL === 'true')
+                        {
+                            writeFile(`./tempData/secondHandHounds_${type.toUpperCase()}_XML.json`, JSON.stringify(jsonResult, null, 4))
+                                .then(() => resolve(jsonResult))
+                                .catch((writeError) => reject(writeError.message));
+                        }
+                        else resolve(jsonResult);
                     })
                     .catch((parseError) => reject(parseError.message));
             })
