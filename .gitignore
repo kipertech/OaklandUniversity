@@ -35,12 +35,4 @@ yarn-error.log*
 rebar/*
 .idea/
 .env
-tempData/profTomlin_combinedNaics_1.json
-tempData/profTomlin_combinedNaics_1a.json
-tempData/profTomlin_combinedNaics_2.json
-tempData/profTomlin_combinedNaics_2a.json
-tempData/profTomlin_combinedNaics_3.json
-data/
-tempData/secondHandHounds_Contacts.sql
-tempData/secondHandHounds_ANIMALS_XML.json
-tempData/secondHandHounds_Contacts_XML.json
+tempData/

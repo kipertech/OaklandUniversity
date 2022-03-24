@@ -1,0 +1,4282 @@
+[
+    {
+      "Origin": "Abandoned No More",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Albany - Shelly",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Amarillo",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Athens TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "BAC",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Bloomington Impound",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Born in rescue",
+      "Category": "Other"
+    },
+    {
+      "Origin": "Born in rescue\r\nadoption return - 3/2/19",
+      "Category": "Other"
+    },
+    {
+      "Origin": "Born in rescue September 2012",
+      "Category": "Other"
+    },
+    {
+      "Origin": "Born in rescue to Coral D220252",
+      "Category": "Other"
+    },
+    {
+      "Origin": "born into SHH\r\nmom = Bianca\r\nOS return",
+      "Category": "Other"
+    },
+    {
+      "Origin": "Born to Clementine",
+      "Category": "Other"
+    },
+    {
+      "Origin": "born to Daisie Mae",
+      "Category": "Other"
+    },
+    {
+      "Origin": "Born to mom Amiga",
+      "Category": "Other"
+    },
+    {
+      "Origin": "Born to mom Bella in rescue",
+      "Category": "Other"
+    },
+    {
+      "Origin": "born to Samantha",
+      "Category": "Other"
+    },
+    {
+      "Origin": "breeder release",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Breeder Release - Cleft Palate",
+      "Category": "OS"
+    },
+    {
+      "Origin": "breeder release - Faye",
+      "Category": "OS"
+    },
+    {
+      "Origin": "breeder release - Mandi Haase",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Breeder Release due to medical",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Breeder release to cleft palate",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Breeder surrender due to cleft palate/no ears",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Brighton",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Brighton AC",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Brittany KY",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Brittany/Briana - TX, Lancaster",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Brittany/Briana - TX, longview",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Campbellsville, KY",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Celtic Corgi",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "CL via MARS",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Corsicana",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Courtesy Post",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Crystal",
+      "Category": "OS"
+    },
+    {
+      "Origin": "DAS Dallas TX, P4P",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Donna TX Animal Control",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Eagan AC",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Eureka KS AC",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "farm",
+      "Category": "OS"
+    },
+    {
+      "Origin": "former SHH dog from 2011, stray",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Fort Worth Animal Control",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "FWACC / P4P",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Gallia Co. Animal Shelter in OH",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Garrard",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Green River - Shelly",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Green River KY",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "green river, KY",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Hardeman",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Hillcrest Shelter",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "International - Puerto Vallarta, Mexico",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "isla mujeres",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "Jeannie Dobbs",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Jennifer Black",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Judy Galloway",
+      "Category": "OS"
+    },
+    {
+      "Origin": "K9 Rescue Outreach",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "kara jones",
+      "Category": "OS"
+    },
+    {
+      "Origin": "kara jones\r\nreturn",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Kara Jones - Alabama",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Kathy Raidt",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Kristen - Rescue Network",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Kristen Johnson",
+      "Category": "OS"
+    },
+    {
+      "Origin": "KWAS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Laurel County",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "LCAS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Leech Lake",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Leech Lake ACO",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Leslie Hennings, Texas",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "leslie houk",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Lewis County, KY",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Lincoln county",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "litter listing",
+      "Category": "OS"
+    },
+    {
+      "Origin": "LMAS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "LMAS KY",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Local breeder release via Teri",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Local OS",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Local OS (Stray)",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "local OS via Dezi",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Local Owner Surrender",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Local Owner Surrender - Mark & Tracy Hunt",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Local Owner Surrender - MNDID",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Local Owner Surrender - VRC/South Metro",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Local Owner Surrender (through MAH)",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Local Owner surrender due to loss of job",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Local Stray",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Local Stray - Julie Lundberg found, OS filled out",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "local stray OS",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "local stray turn in",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "local stray, surrender via Jan Nyberg who is fostering",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Local surrender, stray abandoned at vet clinic (Southview Animal Hospital)",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Lori Magee",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Lufkin Texas",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Lynne Cox - Furry Hearts in MO",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "MACC",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "MACC \"Ebony\"",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Mandi",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Mandi Haas",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Mandi Haase",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Mangum, OK",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Maple Grove Impound",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Milan auction",
+      "Category": "OS"
+    },
+    {
+      "Origin": "momma Clara",
+      "Category": "Other"
+    },
+    {
+      "Origin": "momma Tina",
+      "Category": "Other"
+    },
+    {
+      "Origin": "Nelson county",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Nelson Cty",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "OK",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "OS",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS - barn kittens",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS - Belize",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS - born to Eden",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS - born to Eden\r\nreturn - owner passed away",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS - born to momma Molly",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS - dumped at MAH",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS - foster found",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS - found on a campground",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS - Hinckley Clinic 9/19/21",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS - Hinckley Clinic 9/19/21 due to space",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS - hoarder",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS - Mille Lac Clinic 9/19/21",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS - Mission",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS - nan found",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS - originally from AHS",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS - owner passed away",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS - Return",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS - rez",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS - Shelly",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS - stray",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS - via Deb K. - Iowa",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS - White Earth",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS as foster",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS Brittany\tShelly",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS Brittany - Shelly",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS Brittany Shelly",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS from TX hansonh@rjrt.com",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS shelly",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS stray",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS via Dezi",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS via Hannah Mirabel - clinic",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS via Mandi",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS via Vikki",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS White Earth",
+      "Category": "OS"
+    },
+    {
+      "Origin": "OS/Transfer - Mille Lacs Clinic 4/21/19",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner release after mom died",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - 11/14 Rez Clinic",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - accidental litter",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - allergies and being \"too old\"",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - Amy V's family member, barn kitty",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - barn babies",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - barn cats that got pregnant",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner surrender - Barn kitten",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - came in with 5 kittens",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - Candice Liddy Friend's barn kittens",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - cat hoarder",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - Child allergic, lived with dogs and kids",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - Couldn't afford",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - Death in family",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - distraction for son with online learning",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - dumped at MAH",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - Elderly and unable to care for",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - Fiance doesn't like cats :(",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - Finder is fostering",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - foster found",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - found as a stray, Rachel Bryant volunteer",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - found as stray and filled out form",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - hoarder",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - local barn kitten",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - local barn kittens",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - local barn kitties",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - Local orphaned litter",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - local stray",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - local stray litter",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - Local Stray, OS form filled out. Came in with Jerry C220065",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - Local Stray, OS form filled out. Came in with Tom C220064",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - mackenzie rue picked up",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - mackenzue rue picked up",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - MAH, originally TCPR cat. Contacted them and OK with us keeping. JJS 2/17/17",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - Mille Lacs Clinic 8/9/21",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - Mille Lacs Wellness Clinic 4/2019",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - Nan contact",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - Nan Loftsgaarden found, Hinckley hoarding case",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - neighbor cat that no one wanted",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - not enough time",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner surrender - O passed away",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - OS is fostering",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - Owner passed away, daughter surrendered",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - owner passed away, Laura Udell property manager in building",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - PPR cat per microchip, fine with SHH adopting out",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - Rachel Baglien, outreach",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - Rescue contact of jens, elderly lady couldn't care for",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - Sarah Condons contact/aunt",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - Sean Bethke",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - see emails, domestic abuse situation",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - Stray",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - strays",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - surrendered to MAH, fighter fund due to dog fight and emergency surgery",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - surrendered to vet, vet surrendered to us :)",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - Unwanted litter",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - White Earth event",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - Wife passed away",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender - willed pet",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender -FB group",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender -mom/kittens",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrender, barn kitten",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Owner Surrnder",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Ozark's Haven",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Ozarks",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "p4p",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "P4P D90 Dallas",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "P4P Fort Worth AC",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "P4P FWACC",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Pike County, KY",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Ponca City",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Public",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Rescue Network",
+      "Category": "OS"
+    },
+    {
+      "Origin": "reservation roundup",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Return to Owner",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Rez transfer",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Rock Castle",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Rockcastle",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "romaine",
+      "Category": "OS"
+    },
+    {
+      "Origin": "safehands",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Sarah Fomby/Missouri/K9 Rescue Outreach",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Sending shelter: Catawba\r\nLocation: MO",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Sending shelter: Catawba\r\nLocation: NC",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Sending shelter: Owner surrender via Deb Kuehl\r\nLocation: MO",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Shelly",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Stover MO AC",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Stray",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - abandoned kitten, foster works for housing company",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Alyssa Gillies Barn friend",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "stray - Anitra",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - another SHH foster found, barn kittens",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - barn kittens from Iowa, Melissa Love's cousin",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Barn kitties, mom spayed with outreach funds",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Beckie Grems",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Beth Citurs",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - born to Zsa Zsa",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - bottle fed by jen since 1 day old",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - brought to BPAH and emailed jen",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - campground kitten",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Carrie Openshaw found up north",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Deb K trapped family, mom TNR",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Dr. Tanya found",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - dropped off at BPAH",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - dumped at MAH",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - dumped at office",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Dumped at PPT",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Dumped at SHH office with Ottoman",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Dumped at SHH office with Samwell",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - dumped in back of office :(",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Emily R friend found",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Emily Rognrud friend",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Filled out OS form",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Finder filled out OS",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - foster (christina C) connection, local strays",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - foster found",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Foster trapped locally",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - foster trapped, local",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - found at CH robinson",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - found at local dump",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - found in Chisago County",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - found in Minneapolis",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - found on side of highway",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - from a farm in WI",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - From Lori Matzke",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - from Sharon K",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Highway 90",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Honey C170053",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - iowa",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Iowa/MN border",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Kansas, Lindsey L",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Kim, contact",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Konnie Smith OS form",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - lexington MN",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Liz Lamae",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - local",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - local barn kittens",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - local find, filled out OS form",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - local found next to passed away mother",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - local litter",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Local litter, sharon K finder",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - local orphaned kitten",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - local orphaned litter",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Local stray",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Local stray, Beckie Grems... located owner and surrendered to her",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - local TNR efforts",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - local TNR help",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - local workshop",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Local, 3M",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Local, Alyssa L found",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - local, Beckie G",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - local, Candace Liddy contact",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Local, finder filled out form",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - local, foster contact",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - local, foster found",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Local, foster trapped",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - local, found in box",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - local, found on highway 212",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - local, Kim Contact",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Local, Kim K contact",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Local, Michelle Jacobson",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Local, Minneapolis",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - local, MNSNAP contact",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - local, Nan's friend",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Local, Nan's relative, barn kitten",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Local, OS form filled out",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Local, Sarah Condon and mom found",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - local, sarah condon knows :)",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Local, Tracy Call's friend",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Local, TS's SIL found hikling",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - local, UMN",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Lori M",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - lori matzke",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Lori Matzke find",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - menards kitten, jen rescued",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Missouri, Lindsey L",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Mora, MN",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Mora, MN contact",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Mora,MN contact",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Orphaned kitten",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - orphaned litter",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - orphaned litter, jen bottle babies",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - OS form filled out",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Sharon K",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Sharon K find",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Taylor Smith found, orphaned litter",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Teri W mom found",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Transfer from Shakopee Pound, babies born day of tag",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - TS purchased from flea market :(",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - uncle jerry, barn kittens",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - unwanted barn kitties, TS contact",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray - Unwanted litter, TS friend",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "stray - Yankton Sioux",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray -filled out OS form",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray -local",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray AR",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray found with injuries",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray from an animal control.",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray- Lori M",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Stray- Nan's friend",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Strays - Beth Citurs",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Strays - local",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Strays - Local Barn cats, TS family",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Surrender - Como Park",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Surrender due to cleft lip",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Surrendered",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Surrendered by breeder",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Surrendered by breeder due to cleft palate",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Surrendered by breeder due to no ears",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Surrendered due to cleft palate",
+      "Category": "OS"
+    },
+    {
+      "Origin": "TC Wagner",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Texoma Paw Patrol Rescue",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "tranafer - Magnolia",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Tranfer",
+      "Category": "Other"
+    },
+    {
+      "Origin": "Tranfer - B/B, TX garland",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Tranfer - P4P, stray",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transer - B/B, TX Garland",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transer - B/B, TX stray",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transer - BAC",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "transer - breeder release",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transer - Kristen Johnson/Rondo",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transer - LTAR",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transer - LTAR, orphaned litter",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transer - Maas, TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transer - MACC",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "transer - OS TX B",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transer - P4P, mesquite",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transer - Shelly - KY",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transer - Vickie Veal, OS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer\r\nborn to Jetta",
+      "Category": "Other"
+    },
+    {
+      "Origin": "Transfer  -",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer  - Dallas",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer  - Jeannie Dobbs",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer  - Kara Jones AL",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer  - Maas",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer  - SEMO",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer  SEMO",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer _ Dallas",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer _ Maas",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer _ Mandi",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer _ SEMO",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer _ shelly",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer -",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer -  Kara Jones",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer -  Kristin Rondo",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer -  Leslie",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer -  mandi Haase",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer -  NCAC",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer -  Rez",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer -  Shelly",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer -  Vicky Adams - born to Lulu",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Abandoned No More",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - abandoned no more- TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Afghanistan",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "Transfer - AHS",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - Alabama",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Albany",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Albany KY",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - ALFA",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - ALFA - Kim R",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Altus",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Alyssa Severn",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Amy Frazier TX",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Amy McCoy",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Amy/Deb",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Animal Care Center KY",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - ANM",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "transfer - ARF - Alabama",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Arlington",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Aruba",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "Transfer - Aruba, Taylor",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "Transfer - Auction",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - B's",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - B/B TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - B/B TX, corsicana",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - B/B TX, Dallas",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - B/B TX, DAS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - B/B TX, found at vet",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - B/B TX, strays",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - B/B, TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - B/B, TX - Dallas DAS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - B/B, TX corsicana",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - B/B, TX DAS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - B/B, TX Garland",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - B/B, TX Lancaster",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - B/B, TX mesquite",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - B/B, TX stray",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - B/B, TX strays",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - B/B, TX surrogate",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - B/B, TX, Corsicana",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - B/B, TX, Garland",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - B/B, TX, red oak",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - B/B, TX, stray",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - BAC",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - BAC, but originally a stray from finder who contacted us. see emails",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - BAC, feral momma",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - BAC, John's Cousin can no longer care for",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - BAC, stray",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - BAC, strays",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "transfer - Bailing Out Benji",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - Barb",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Barn Cat, Nan's friend",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Transfer - Beijing",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "transfer - Bette L",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Bette Lessen",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Blue Pearl",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Blue Pearl Stray, Fx Pelvis",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - born in rescue",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - born in rescue\r\nreturn FKA Trouble",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - born to Alika",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - born to Anna Banana",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - born to Anya",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - born to Aspen",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - born to Aspen\r\nreturn",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - born to Bellla",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - born to Bindy",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - born to Birdie",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - born to Candy",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - born to Ferris",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - born to Hot Sauce",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - born to Jori",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - born to Leta",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - born to Marza",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - born to Minnie",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - born to momma Blueberry Kim R",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - born to momma Breezy",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - born to momma Little Foot",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - born to momma Little Foot\r\nreturn FKA Sugar",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - born to momma Mimi in rescue",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - born to Peaches",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - born to Rosetta",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - born to Tippsi",
+      "Category": "Other"
+    },
+    {
+      "Origin": "Transfer - BPAH",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - BPAH, OS from them",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - BPAH, Tech bottle feeding",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Bracken County KY",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Brandi",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Brandi J",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Brandi Janke",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Breeder Release",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - breeder release - Mandi Haase",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - breeder release, born to Wish",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Brittany",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Brittany - Lincoln",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Brittany Kegney - TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Brittany Miller",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Brittany Zimlich TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Brittany,Briana, TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Brittany/Briana, Corsicana",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Brittany/Briana, Corsicana Shelter",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Brittany/Briana, Dallas",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Brittany/Briana, DAS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Brittany/Briana, Fort Worth",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Brittany/Briana, Lancaster",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Brittany/Briana, TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Brittany/Brianna",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Brittany/Brianna Dallas, DAS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - brittany/brianna, DAllas",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Brittany/Brianna, Dallas AS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Brittany/Brianna, Dallas DAS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Brittany/Brianna, Dallas TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Brittany/Brianna, DAS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Brittany/brianna, Lancaster TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Brittany/Brianna, Mesquite",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Brittany/brianna, Mesquite AS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - brittany/brianna, mesquite TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Brittany/Brianna, mesquite, TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Brittany/Brianna, Paris TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Brittany/Brianna, red oak",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - brittany/brianna, red oak Shelther",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - brittany/brianna, red oak TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Brittany/Brianna, strays",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Brittany/Brianna, TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Brittany/Brianna, TX Lancaster Shelter",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Brooke Golden",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Burnsville Ac",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "transfer - Burnsville Parkway",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "transfer - Cabo",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "transfer - Cabos",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "transfer - Cabot AR",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Cancun",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "transfer - Cancun Mexico",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "Transfer - Cancun, international",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "transfer - Chalice",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Chalice - Soft Hearts for Sad Eyes",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Charles Reinhorn",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Cheyenne River AC SD Mandi Haase",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - China",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "transfer - Chuck Reinhorn",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Como vet, local stray",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "transfer - Corsicana",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Costa Rica",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "transfer - Critter Shack TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Dallas",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Dallas\r\nreturn",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Dallas Animal Services",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Dallas, DAS Brittany/Brianna",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - DAS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - DAS, brittany/briana",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - DAS, dallas",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Dawn Marie O'Bryan / Shelly",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Deb",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Deb K",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Deb K OK",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Desoto MS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Desoto MS Charles R.",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Desoto, MS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Dobba",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Dobbs",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Dunn County WI",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Eagan",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - Eagan AC",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - Eagan AC, Pilot Knob",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - Eagan AC, stray",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - Eagan, AC",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "transfer - Eagle Butte SD Mandi Haase",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Elk City OK via Vicky Adams",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Emily R",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - ER",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Estill",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - FHART/foothills, OS",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - FL, Summer, catahoulas",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Fort Gibson OK",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Gail Tolleson",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Garland TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Garland TX Laura O",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Garland TX, Brittany/Brianna",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Garland, TX (Brianna/Brittany)",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Garrard",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Garrard - Shelly",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Garrard - Shelly\r\nOS return",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Garrard Cty - Shelly",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Gary",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Geny",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Graland TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Hancock County",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Hardeman",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Harvey",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Heather Wigley / Katie Knapp",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Hillcrest",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - Hillcrest, barn cat",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - Hillcrest, stray",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - Hillcrest, stray from trailer home. Came in with 3 newborns (transferred to another rescue)",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - Hoarding",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Hondo, TX Maas",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - HOPE Humane Society AR",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Hospice",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Houk",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Hugo, OK",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Hugo, OK born to Lucie",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - international, puerto vallarta",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "transfer - intl Dominican Republic",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "Transfer - Iowa OS, deb K",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Isla",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "transfer - Isla Mexico",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "transfer - Isla Mujeres",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "Transfer - Isla Mujeres, Mexico",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "Transfer - Janke",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Jasper AL Kara Jones",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Jasper County",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Jasper, AL Kara Jones",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Jeanne Dobbs",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Jeannie Dobbs",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Jeannie Dobbs\r\nReturn",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Jeannie Dobbs\r\nreturn 3/5/21",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Jeannie Dobbs, OK",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Jen Black",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Jen Maas",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Jen Maas, TX",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Jenn Black",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Jenn Maas",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Jennifer Black",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Jennifer Black\r\nreturn",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Jolene W.",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Jonesboro AC - Kim R",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Jonesboro AR Kim R",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Jonesboro, AR Kim R",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Joplin",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Joplin, MO",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Kabul, Afghanistan",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "transfer - Kansas Humane",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Kansas, Amy (deb K's friend)",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Kara Jones",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Kara Jones\r\nreturn",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Kara Jones AL",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Kara Jones, AL",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Kat - Talyor County",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Kat - Taylor County",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Katie Schleicher",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - KCCP",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - KCMO",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Kennett MO",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - kim P, independent rescue contact",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Kim P, independent rescue contact of Jen's",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Kim R",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Kim R\r\nreturn",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Kim R ALFA",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Kim R Jonesboro",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Kim R.",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Kim Reiner",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Kirsten Johnson Rez trip",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Kristen Johnson",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Kristen Johnson\r\nCheyenne River rez",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Kristen Johnson\r\nreturn",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Kristen Johnson, orphaned litter",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Kristen Johnson, rescue network",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Kristen Johnson/Rescue Network",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Kristen Johnson/Rondo",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Kristen Johnson/Rondo, the rescue crew",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Kristen Rondo",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Kristen Rondo, Rescue Crew",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Kristen Rondo, Rescue network",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Kristen Rondo, Rez",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Kristen Rondo, Rez run",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Kristen Rondo/ Rescue Network",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Kristen Rondo/p4p",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Kristen Rondo/Rescue Network",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Kristen, Rescue Network",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Kristen, Rescue Network - orphaned litter",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Kristenn Johnson",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Kristin Johnson",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Kristin Johnson/Rondo",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Kristin Johnson/Rondo, Rescue Network",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Kristin Rondo",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Kristin Rondo, SD",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - kristin rondo/johnson",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Kristni Johnson",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - KS, MJ contact",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - KWAS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Lake Traverse",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Lancaster",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Lancaster TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Lancaster TX B",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Laredo",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Laredo TX B",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Laredo, TX B",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Laura O",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - LCAS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Lee's Summit - Alyssa Severn",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Leech Lake",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Leslie",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Leslie H",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Leslie Houk",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - leslie houk\r\nreturn",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Leslie Houk, MO",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Lewis - Shelly",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Lewis County KY",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Lewis Cty Shelly",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Lightshine - KC Willis",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "transfer - Lincoln",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Lincoln County",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Lincoln, born to Lola",
+      "Category": "Other"
+    },
+    {
+      "Origin": "Transfer - Lindsey L, shelter in Missouri",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - LMAS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - LMAS - Shelly",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Local",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Local Reservation",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Local vet clinic, stray",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "transfer - Lori Magee",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Lori Magee TX",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Lori Maguire",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Lori W",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Lori Weese",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Los Cabos",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "transfer - Los Cabos Mexico",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "Transfer - LTAR",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - LTAR round up",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Lyndale Animal Hospital",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Lysa, Grove, OK",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Maas",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Maas\r\nOS",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Maas\r\nreturn",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Maas - born to Bindy",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - Maas - born to Dixie",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - Maas/Lynn",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - MACC",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - MACC, bottle babies",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - MACC, injured",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - MACC, originally SHH kitten from 6 years ago",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "transfer - Magnolia",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - magnolia AR",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Magnolia, AR",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - MAH",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - MAH, stray/OS",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Mand Haase",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Mandi",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Mandi Haas",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Mandi Haase",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Mandi Haase\r\nreturn",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Mandi Haase - breeder release",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Mandi Haase breeder release",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Mandi Haase, born to Roxxie",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Mando Haase breeder release",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Mangum",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Manslick KY",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Mary Ann Taft - AR",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Mass",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Mazatlan",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "transfer - McKinney TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Melissa Case via Shelly",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Mesquite",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Mesquite TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Mesquite, TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Mesquite, TX - Brittany/Brianna",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Mesquite, TX (brianna/brittany)",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - MG Impound",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - MG PUPS",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - Mill",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Mille Lacs clinic",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Mille Lacs Res",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Mindi Haase",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Mindy",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Mindy Davis",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Mineral Wells TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Mission",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Mission OS",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Missouri",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Mitza",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Mitza KY",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - MJ",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - MJ / Deb K",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - MJ from Tulsa, OK",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - MJ in KS",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - MJ via Deb",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - MJ, from joplin",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - MJ, joplin MO",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - MJ, Tulsa, OK",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - MJ/oklahoma",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - MO stray, deb k contact",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - MO, leslie contact",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - MO, Mj",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - MO, Sarah Fomby",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Monterrey Mexico Maas",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "Transfer - Mora, MN",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "transfer - Mt. Pleasant TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Muhlenberg",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Mutt Mutt - San Pancho",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "transfer - Nacogdoches, TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - NCAC",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Nelson",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Nelson - Shelly",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Nelson County KY",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Nelson Cty",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Nelson Cty Shelly",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Nicolle Brooks",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Oazrks",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - OK, Brandie Jake",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Omani Paws",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "Transfer - OS",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - OS - Breeder",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - OS - Shelly",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - OS - Tammy Peak",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - OS - TX B",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - OS at forest lake vet, hannah mirabal",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - OS from Nan's friend, Barn kitten",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - OS P4P",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - OS TX B",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - OS via Brittany",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - OS.- Shelly",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Outreach",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Ozark",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Ozarks",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Ozarks\r\nadoption return",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Ozarks\r\nreturn",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Ozars",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - P4P",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - P4P - surrender",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - P4P Palestine",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - P4P, Arlington",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - P4P, Corsicana",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - P4P, Dallas",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - P4P, dumped strays",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - p4p, edinburg",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - P4P, Forney AS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - P4P, greenville",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - P4P, group of strays",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - P4P, MAS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - P4P, Mesquite",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - P4P, OS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - P4P, OS/Stray",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - P4P, owner surrender due to living situation",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - P4P, stray",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - P4P, strays",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - P4P, surrender",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - P4P, TNR group",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Paragould / Kim Reiner",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Paris TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Paris, TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Perry County OH",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Peru",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "transfer - Pet Central",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Pet Central AH",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Pet haven transfer",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "transfer - Pittsburg KS Bette L",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Pittsburgh KS Laura O",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Ponca",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Ponca City",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Porky Collins KY",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Puerto Rico",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "transfer - Puerto Vallarta",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "Transfer - Puerto Vallarta, international",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "Transfer - Puerto Vallarta, Julie",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "Transfer - Puerto Vallarta, Mexico",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "Transfer - Puerto Vallarta, Pause 4 Paws",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "Transfer - Pups",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - PUPS, os",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - PUPS, os/went to jail",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - PUPS, stray",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - PUPS, TNR litter",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - PUPS,stray",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - Rachel Long",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Rachel Waid",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Red Oak TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Rescue Network, Kristen",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Rescue Network, Kristen Johnson",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Rescue Network, Kristin Rondo",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Rescue Network/ Kristen R",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Rescue Network/ Kristen Rondo",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Rescue Network/Kristen",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Rescue network/Kristen Johnson",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Rescue Network/Kristen Rondo",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - reservation",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Reservation event August 2021 Mille Lacs",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Reservation Lake Traverse",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Return",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Rez",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - rez - Kristen Johnson",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Rita - Kim R",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Rita / Kim R",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Rita Grigsby",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Roamine",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Robin Carson",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Rockcastle",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Rockcastle - Shelly",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Rockport, TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Romaine",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Romaine\r\nreturn",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Ruff Start",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "transfer - Sallisaw OK",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - san Antonio",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - San Cabo",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "Transfer - Sara Geny",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Sarah Barney, Missouri stray",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Sarah Barney, Missouri stray dumped at taco bell",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Sarah Barney, MO",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Sarah Barney, MO Stray",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Sarah Fomby",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Sarah Fomby, stray running down road",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - SD reservation, independent rescue contact",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - SEMO",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Shady Oak",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Shakopee",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - Shakopee AC",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - shakopee pound",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer - Shakopee Pounds",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "transfer - Shamrock",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Shanghai, China",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "Transfer - Sharon K, independent rescuer",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Shelby County",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Shelby County KY",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Shelby County, Shelly",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Shellly",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Shelly",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Shelly\r\nreturn",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Shelly - Deanna",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Shelly - KY",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Shelly (From GA)",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Shelly KY foster adopting",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Shelly, KY",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Sherry Dillion",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Sherry Dillon",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Sherry Lee",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Smith County",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Smith. TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - St. Thomas",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "Transfer - stray from Blue Pearl EP",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Transfer - Stray, TX",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Transfer - Sue Ozarks",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Suplur Springs TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Surrender at BPAH",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Surrender event, We r furr",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Surrender event, We r furr, OS too many animals",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - surrender to MAH",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - TAPS",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "transfer - TAPS Kim R",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "transfer - TAPS, Kim R",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "transfer - Taylor County",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - TC Wagner",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - TC. Wagner",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - TCAS _ Taylor COunty",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - TCAS Taylor County",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - TCPBR",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "transfer - Teri Simpson",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Terrell",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Terri S",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Terri S.",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Terri Simpson",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Texas",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Texas, Brianna/Brittany",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - texas, Brittany/Briana",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Texas, Brittany/Brianna - Red Oak AS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Texas, OS Brittany/Brianna",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Theresa R",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Tijuana",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "transfer - Tijuana - Sally",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "Transfer - Tracy R",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Tracy Raburn",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Tri County Albany",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Tri County Shelly",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Tulsa",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Tulsa\r\nOS return",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Tulsa - \r\nreturn",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Tulsa - born to Ethel",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - Tulsa - born to Ethel\r\nreturn",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer - Tulsa Humane Ruff Start",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "transfer - Tulum Mexico via Isla",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "Transfer - TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - TX - B",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - TX B",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - TX B\r\nreturn",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - TX B OS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - TX Brianna, DAS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - TX-B",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - TX, B/B",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - TX, B/B Corsicana",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - TX, B/B Garland",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - TX, Corsicana, Brittany/Briana",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - TX, MAAS",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - TXB",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - UMN vet",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - VA",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Vickie Adams",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Vickie V",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Vickie Veal",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Vickie Veal - MO, albany AC",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Vickie Veal in MO",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Vickie Veal Missouri, Owner surrender/passed away",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Vickie Veal Missouri, shelter",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Vickie Veal, MO",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Vickie Veal, OS",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Vicky",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Vicky Adams",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - Vicky Adams - born to Rainbow",
+      "Category": "Other"
+    },
+    {
+      "Origin": "Transfer - Vicky Adams... Elk City, OK shelter",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Vicky- Elk City,OK",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - vicky, elk city OK",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Vikki Crook",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - WAR",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - White earth",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - White earth 6/3",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - White earth 6/3/18",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - White Earth 9/23/18",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - White earth clinic",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - White earth clinic 6/3",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - White earth clinic, in utero",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - White Earth event",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - White earth event 6/3",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - white earth/karen",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer - White Pine Rez",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer - Wichita AC",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer - Winfield, AL",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer - Yankton Sioux",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer -ASH",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer -BAC",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer -BAC, stray with 7 kittens",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer -Eagan AC",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer -Hillcrest, stray",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "transfer -Jeannie Dobbs",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer -LTAR",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer -MAAS",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer -Mandi H",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer -P4P, Strays",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Transfer -PUPS",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer -Vickie V",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer -white earth clinic",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer =",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer Eagle Butte SD Mandi Haase",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer from Rescue Network/Owner Surrender",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer from Rescue Network/Reservation surrender",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer Kristen Johnson",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer Lori Magee",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer Magnolia",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer Mandi Haase",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer OS TXB",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer pet central",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "transfer Shelly",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer Tri County Albany\r\nOS - return",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer-",
+      "Category": "Other"
+    },
+    {
+      "Origin": "transfer- Arma KS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer- B/B TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer- BAC",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "Transfer- Brittany/Brianna, Rowlett, TX",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer- kara jones",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer- kara jones\r\nreturn",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer- Kristen Johnson",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer- Kristen Johnson, Rescue Network",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer- Kristen Rondo",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer- Kristen Rondo/ Rescue Network",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer- Leslie Houk",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer- LMAS",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer- LTAR",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer- Maas",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer- Mesquite",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer- MO, leslie contact",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer- NCAC",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer- Nelson",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer- ozarks",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Transfer- P4P, Corsicana",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "transfer- Puerto Rico",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "Transfer- Pups",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "transfer- Republic of Georgia",
+      "Category": "Transfer International"
+    },
+    {
+      "Origin": "Transfer- Rescue Network, Kristen Rondo",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer- Rescue Network/Kristen",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer- Shakopee AC",
+      "Category": "Transfer Instate"
+    },
+    {
+      "Origin": "transfer- Shelly",
+      "Category": "OS"
+    },
+    {
+      "Origin": "transfer- TC Wagner",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer- Vickie Veal",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transfer- white earth surrender event",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Transffer - P4P, strays",
+      "Category": "Stray"
+    },
+    {
+      "Origin": "Transport",
+      "Category": "Other"
+    },
+    {
+      "Origin": "Transport -",
+      "Category": "Other"
+    },
+    {
+      "Origin": "Transport - Shelly",
+      "Category": "OS"
+    },
+    {
+      "Origin": "Trenton",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Twala Ellison",
+      "Category": "OS"
+    },
+    {
+      "Origin": "wayne county",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Wayne Cty",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Wayne Cty KY",
+      "Category": "Transfer Outstate"
+    },
+    {
+      "Origin": "Website Test Cat",
+      "Category": "Other"
+    },
+    {
+      "Origin": "Wilmer City TX",
+      "Category": "Transfer Outstate"
+    }
+]
