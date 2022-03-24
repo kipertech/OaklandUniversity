@@ -5,7 +5,7 @@ import moment from "moment";
 // region Function - Find the date in string (MMMM YYYY)
 export function getFirstDateFromString(text, excludeStr = '842', startingIndex = 0)
 {
-    let trimmedText = text.substring(startingIndex, text.length - 1).replaceAll(excludeStr, '');
+    let trimmedText = text.substring(startingIndex, text.length - 1).replace(new RegExp(excludeStr, 'g'), '');
 
     let allNumbers = trimmedText.match(/^\d+|\d+\b|\d+(?=\w)/g),
         firstYearOccurrence = allNumbers.find((num) => num.length === 4);

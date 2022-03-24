@@ -142,7 +142,7 @@ function getCIKDataSingle(CIK)
                             filingDate: filingDate[index],
                             form: item,
                             primaryDocument: primaryDocument[index],
-                            url: `https://www.sec.gov/Archives/edgar/data/${CIK}/${accessNum.replaceAll('-', '')}/${docName}`
+                            url: `https://www.sec.gov/Archives/edgar/data/${CIK}/${accessNum.replace('/-/g', '')}/${docName}`
                         });
                     }
                 });

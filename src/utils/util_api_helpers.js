@@ -31,7 +31,7 @@ export function apiWrapperXML({
                 xml2js
                     .parseStringPromise(response, {
                         explicitArray: false,
-                        tagNameProcessors: [(name) => name?.replaceAll(tagName, '')]
+                        tagNameProcessors: [(name) => name?.replace(new RegExp(tagName, 'g'), '')]
                     })
                     .then((result) => {
                         let jsonResult = result[type]?.[type];
