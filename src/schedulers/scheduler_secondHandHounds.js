@@ -712,7 +712,7 @@ function importOriginReceivedDateFromXML()
                     dbAttributeList = keyList.map((key) => attributeMap[key]).concat('originParsed');
 
                 json.forEach((item) => {
-                    let originParsed = originMapping.find((origin) => origin['Origin'].toLowerCase() === item['Origin']?.toLowerCase())?.['Category'] || 'Other';
+                    let originParsed = originMapping.find((origin) => origin['Origin'].toLowerCase() === item['Origin']?.toLowerCase())?.['Category'] || 'OS';
 
                     sqlValues.push(
                         '(' +
