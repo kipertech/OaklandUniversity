@@ -13,12 +13,10 @@ import nodeScheduler from 'node-schedule';
 import moment from 'moment-timezone';
 import MySQL from 'mysql';
 import { Promise } from "bluebird";
-import ExcelJS from "exceljs";
 
 // Helpers
 import { apiWrapper, apiWrapperXML } from "../utils/util_api_helpers";
 import {
-    Abort,
     isObject,
     Success
 } from "../utils";
@@ -27,9 +25,6 @@ import { sloppyAuthenticate } from "../middlewares/middleware_authentication";
 
 // Define scheduler
 const scheduler = new ToadScheduler();
-
-// Global
-const GLOBAL = require('../configs/config_secondHandHounds');
 
 let secondHandHoundsRouter = Router();
 
@@ -297,11 +292,11 @@ function parseAttributeValue(attributeValue)
     // Check arrays and objects
     if (Array.isArray(attributeValue))
     {
-        return('"' + attributeValue.map((item) => JSON.stringify(item)).join('-').replaceAll('"', '') + '"');
+        return('"' + attributeValue.map((item) => JSON.stringify(item)).join('-').replace(/"/g, '') + '"');
     }
     else if (isObject(attributeValue))
     {
-        return('"' + JSON.stringify(attributeValue).replaceAll(',', '-') + '"');
+        return('"' + JSON.stringify(attributeValue).replace(/,/g, '-') + '"');
     }
 
     // Other common types
@@ -313,7 +308,7 @@ function parseAttributeValue(attributeValue)
         {
             if (isNaN(attributeValue))
             {
-                returnValue = '"' + attributeValue.replaceAll('"', `'`) + '"';
+                returnValue = '"' + attributeValue.replace(/"/g, "'") + '"';
             }
             else returnValue = Number(attributeValue);
             break;
@@ -330,7 +325,7 @@ function parseAttributeValue(attributeValue)
         }
         default:
         {
-            returnValue = '"' + JSON.stringify(attributeValue).replaceAll('"', `'`) + '"';
+            returnValue = '"' + JSON.stringify(attributeValue).replace(/"/g, "'") + '"';
             break;
         }
     }
@@ -338,7 +333,7 @@ function parseAttributeValue(attributeValue)
     // Remove all backslash
     return(
         typeof returnValue === 'string' ?
-            returnValue.replaceAll('`', '')
+            returnValue.replace(/`/g, '')
             :
             returnValue
     );
@@ -729,7 +724,7 @@ function importOriginReceivedDateFromXML()
                                 }
                                 else return parseAttributeValue(item[attributeKey]);
                             })
-                            .concat('"' + originParsed.replaceAll('\n', ' ').replaceAll('"', '') + '"')
+                            .concat('"' + originParsed.replace(/\n/g, ' ').replace(/"/g, '') + '"')
                             .join(', ') +
                         ')'
                     );
