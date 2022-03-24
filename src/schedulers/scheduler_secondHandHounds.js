@@ -165,15 +165,8 @@ const jobNames = {
     STATUS: 'statusFetch'
 };
 
-let currentAnimalJob = null,
-    currentPictureJob = null,
-    currentBreedJob = null,
-    currentColorJob = null,
-    currentContactJob = null,
-    currentLocationJob = null,
-    currentPatternJob = null,
-    currentSpeciesJob = null,
-    currentStatusJob = null;
+let fullJobInstance = null,
+    totalStartedAt = 0;
 // endregion
 
 // region Shared Function - Run Node Scheduler
@@ -187,11 +180,11 @@ function runNodeScheduler({
 {
     return new Promise((resolve) =>
     {
-        // if (isLocal())
-        // {
-        //     resolve('Node Scheduler is not usable on Dev environment');
-        //     return;
-        // }
+        if (isLocal())
+        {
+            resolve('Node Scheduler is not usable on Dev environment');
+            return;
+        }
 
         // If we already scheduled the job to start
         let nextInvocation = nodeSchedulerInstance?.nextInvocation();
@@ -465,14 +458,14 @@ function generateImportStatement({ jobName, apiLink, tableName, dbAttributeNames
 // endregion
 
 // region SCHEDULER Function
-export function runJobScheduler(jobName, nodeSchedulerInstance, apiLink = '', dbAttributeNames = [], tableName = '')
+export function runAllImportJobs()
 {
-    let minuteInterval = process.env.ANIMAL_JOB_INTERVAL_MINUTES || 5,
+    let jobName = (isLocal() ? 'Local_' : '') + 'fullJobFetch',
+        minuteInterval = process.env.ANIMAL_JOB_INTERVAL_MINUTES || 15,
         dayInterval = process.env.ANIMAL_JOB_INTERVAL_DAYS || 1;
 
     return runNodeScheduler({
         jobName,
-        nodeSchedulerInstance,
         minuteInterval,
         dayInterval,
         jobFunction: ({
@@ -482,42 +475,32 @@ export function runJobScheduler(jobName, nodeSchedulerInstance, apiLink = '', db
             alreadyUpdateTime
         }) => scheduleFetchJob({
             jobName,
-            nodeSchedulerInstance,
             scheduleTime,
             configItemID,
             duration,
             alreadyUpdateTime,
             minuteInterval,
-            dayInterval,
-            apiLink,
-            dbAttributeNames,
-            tableName
+            dayInterval
         })
     });
 }
 
 function scheduleFetchJob({
     jobName,
-    nodeSchedulerInstance,
     scheduleTime,
     configItemID,
     duration,
     alreadyUpdateTime,
     minuteInterval,
-    dayInterval,
-
-    apiLink,
-    tableName = '',
-    dbAttributeNames = []
+    dayInterval
 })
 {
-    nodeSchedulerInstance = nodeScheduler.scheduleJob(moment.unix(scheduleTime).toDate(), function ()
+    fullJobInstance = nodeScheduler.scheduleJob(moment.unix(scheduleTime).toDate(), function ()
     {
         // Configure the job
         const task = new AsyncTask(
             jobName,
-            () =>
-            {
+            () => {
                 // Update next reminder time
                 if (configItemID && !alreadyUpdateTime)
                 {
@@ -525,12 +508,14 @@ function scheduleFetchJob({
                     updateSchedulerConfig(configItemID, nextRunAt);
                 }
 
-                return generateImportStatement({
-                    jobName,
-                    apiLink,
-                    tableName,
-                    dbAttributeNames
-                });
+                // Notify via Slack
+                totalStartedAt = moment().unix();
+                sendSlackMessage('INFO', 'Import job started', true);
+
+                // Run all import jobs
+                // Notified via Slack, no rejection will be fired
+                // but AsyncTask() require returning a Promise
+                return executeAllJobs();
             },
             (error) => sendSlackMessage(`[Job Error] ${jobName}`, typeof error === 'string' ? error : (error.message + '\n\n' + JSON.stringify(error)))
         );
@@ -821,6 +806,166 @@ secondHandHoundsRouter.post('/importOriginReceivedDateXML', sloppyAuthenticate, 
 });
 // endregion
 
+// region MAIN FUNCTION - Execute All Jobs
+function executeAllJobs(isScheduler = false)
+{
+    let notificationTitle = isScheduler ? 'Full Job Scheduler' : 'Path: /oneTimeImport';
+
+    return new Promise((resolve) => {
+        Promise
+            .mapSeries([
+                {
+                    // Breeds
+                    jobName: jobNames.BREED,
+                    apiLink: '/animals/breeds',
+                    tableName: 'Breeds',
+                    dbAttributeNames: ['name']
+                },
+                {
+                    // Patterns
+                    jobName: jobNames.PATTERN,
+                    apiLink: '/animals/patterns',
+                    tableName: 'Patterns',
+                    dbAttributeNames: ['name']
+                },
+                {
+                    // Species
+                    jobName: jobNames.SPECIES,
+                    apiLink: '/animals/species',
+                    tableName: 'Species',
+                    dbAttributeNames: ['singular', 'plural', 'youngSingular', 'youngPlural']
+                },
+                {
+                    // Statuses
+                    jobName: jobNames.STATUS,
+                    apiLink: '/animals/statuses',
+                    tableName: 'Statuses',
+                    dbAttributeNames: ['name', 'description']
+                },
+                {
+                    // Colors
+                    jobName: jobNames.COLOR,
+                    apiLink: '/animals/colors',
+                    tableName: 'Colors',
+                    dbAttributeNames: ['name']
+                },
+                {
+                    // Animals
+                    jobName: jobNames.ANIMAL,
+                    apiLink: '/orgs/3699/animals',
+                    tableName: 'Animals',
+                    dbAttributeNames: [
+                        "activityLevel",
+                        "adoptedDate",
+                        "adoptionFeeString",
+                        "adultSexesOk",
+                        "ageGroup",
+                        "ageString",
+                        "availableDate",
+                        "birthDate",
+                        "breedPrimary",
+                        "breedPrimaryId",
+                        "breedSecondary",
+                        "breedSecondaryId",
+                        "breedString",
+                        "coatLength",
+                        "colorDetails",
+                        "createdDate",
+                        "descriptionText",
+                        "distinguishingMarks",
+                        "earType",
+                        "energyLevel",
+                        "exerciseNeeds",
+                        "eyeColor",
+                        "fenceNeeds",
+                        "foundDate",
+                        "foundPostalcode",
+                        "groomingNeeds",
+                        "housetrainedReasonNot",
+                        "indoorOutdoor",
+                        "isAdoptionPending",
+                        "isAltered",
+                        "isBirthDateExact",
+                        "isBreedMixed",
+                        "isCatsOk",
+                        "isCourtesyListing",
+                        "isCurrentVaccinations",
+                        "isDeclawed",
+                        "isDogsOk",
+                        "isFarmAnimalsOk",
+                        "isFound",
+                        "isHousetrained",
+                        "isKidsOk",
+                        "isMicrochipped",
+                        "isNeedingFoster",
+                        "isSeniorsOk",
+                        "isSpecialNeeds",
+                        "isSponsorable",
+                        "isYardRequired",
+                        "killDate",
+                        "killReason",
+                        "name",
+                        "newPeopleReaction",
+                        "obedienceTraining",
+                        "ownerExperience",
+                        "pictureCount",
+                        "pictureThumbnailUrl",
+                        "priority",
+                        "qualities",
+                        "rescueId",
+                        "searchString",
+                        "sex",
+                        "sheddingLevel",
+                        "sizeCurrent",
+                        "sizeGroup",
+                        "sizePotential",
+                        "sizeUOM",
+                        "slug",
+                        "specialNeedsDetails",
+                        "sponsors",
+                        "sponsorshipDetails",
+                        "sponsorshipMinimum",
+                        "summary",
+                        "tailType",
+                        "trackerimageUrl",
+                        "updatedDate",
+                        "url",
+                        "videoCount",
+                        "videoUrlCount",
+                        "vocalLevel"
+                    ]
+                },
+                'contactImport',
+                'animalFosterAdopterImport',
+                'animalOriginReceivedDateImport'
+            ], (item) => {
+                if (typeof item === 'string')
+                {
+                    switch(item)
+                    {
+                        case 'contactImport': return importContactsFromXML();
+                        case 'animalFosterAdopterImport': return importFosterAdopterFromXML();
+                        case 'animalOriginReceivedDateImport': return importOriginReceivedDateFromXML();
+                    }
+                }
+                else return generateImportStatement(item);
+            })
+            .then(() => {
+                setTimeout(() => {
+                    sendSlackMessage(notificationTitle, 'Finished all imports, took ' + (moment().unix() - totalStartedAt) + 's', true);
+                    totalStartedAt = 0;
+                    resolve('Done');
+                }, 2000); // Wait a bit because cannot send 2 consecutive Slack messages
+            })
+            .catch((error) => {
+                sendSlackMessage(notificationTitle, 'Errors occurred, took ' + (moment().unix() - totalStartedAt) + 's\n\n' + error.message);
+                totalStartedAt = 0;
+                resolve('Done');
+            });
+    });
+}
+// endregion
+
 // region POST - Start Scheduler
 secondHandHoundsRouter.post('/oneTimeImport', sloppyAuthenticate, (request, response) =>
 {
@@ -828,146 +973,7 @@ secondHandHoundsRouter.post('/oneTimeImport', sloppyAuthenticate, (request, resp
     Success(response, 'Jobs executed, you will be notified via Slack');
 
     // Initiate all promises
-    Promise
-        .mapSeries([
-            {
-                // Breeds
-                jobName: jobNames.BREED,
-                apiLink: '/animals/breeds',
-                tableName: 'Breeds',
-                dbAttributeNames: ['name']
-            },
-            {
-                // Patterns
-                jobName: jobNames.PATTERN,
-                apiLink: '/animals/patterns',
-                tableName: 'Patterns',
-                dbAttributeNames: ['name']
-            },
-            {
-                // Species
-                jobName: jobNames.SPECIES,
-                apiLink: '/animals/species',
-                tableName: 'Species',
-                dbAttributeNames: ['singular', 'plural', 'youngSingular', 'youngPlural']
-            },
-            {
-                // Statuses
-                jobName: jobNames.STATUS,
-                apiLink: '/animals/statuses',
-                tableName: 'Statuses',
-                dbAttributeNames: ['name', 'description']
-            },
-            {
-                // Colors
-                jobName: jobNames.COLOR,
-                apiLink: '/animals/colors',
-                tableName: 'Colors',
-                dbAttributeNames: ['name']
-            },
-            {
-                // Animals
-                jobName: jobNames.ANIMAL,
-                apiLink: '/orgs/3699/animals',
-                tableName: 'Animals',
-                dbAttributeNames: [
-                    "activityLevel",
-                    "adoptedDate",
-                    "adoptionFeeString",
-                    "adultSexesOk",
-                    "ageGroup",
-                    "ageString",
-                    "availableDate",
-                    "birthDate",
-                    "breedPrimary",
-                    "breedPrimaryId",
-                    "breedSecondary",
-                    "breedSecondaryId",
-                    "breedString",
-                    "coatLength",
-                    "colorDetails",
-                    "createdDate",
-                    "descriptionText",
-                    "distinguishingMarks",
-                    "earType",
-                    "energyLevel",
-                    "exerciseNeeds",
-                    "eyeColor",
-                    "fenceNeeds",
-                    "foundDate",
-                    "foundPostalcode",
-                    "groomingNeeds",
-                    "housetrainedReasonNot",
-                    "indoorOutdoor",
-                    "isAdoptionPending",
-                    "isAltered",
-                    "isBirthDateExact",
-                    "isBreedMixed",
-                    "isCatsOk",
-                    "isCourtesyListing",
-                    "isCurrentVaccinations",
-                    "isDeclawed",
-                    "isDogsOk",
-                    "isFarmAnimalsOk",
-                    "isFound",
-                    "isHousetrained",
-                    "isKidsOk",
-                    "isMicrochipped",
-                    "isNeedingFoster",
-                    "isSeniorsOk",
-                    "isSpecialNeeds",
-                    "isSponsorable",
-                    "isYardRequired",
-                    "killDate",
-                    "killReason",
-                    "name",
-                    "newPeopleReaction",
-                    "obedienceTraining",
-                    "ownerExperience",
-                    "pictureCount",
-                    "pictureThumbnailUrl",
-                    "priority",
-                    "qualities",
-                    "rescueId",
-                    "searchString",
-                    "sex",
-                    "sheddingLevel",
-                    "sizeCurrent",
-                    "sizeGroup",
-                    "sizePotential",
-                    "sizeUOM",
-                    "slug",
-                    "specialNeedsDetails",
-                    "sponsors",
-                    "sponsorshipDetails",
-                    "sponsorshipMinimum",
-                    "summary",
-                    "tailType",
-                    "trackerimageUrl",
-                    "updatedDate",
-                    "url",
-                    "videoCount",
-                    "videoUrlCount",
-                    "vocalLevel"
-                ]
-            },
-            'contactImport',
-            'animalFosterAdopterImport',
-            'animalOriginReceivedDateImport'
-        ], (item) => {
-            if (typeof item === 'string')
-            {
-                switch(item)
-                {
-                    case 'contactImport': return importContactsFromXML();
-                    case 'animalFosterAdopterImport': return importFosterAdopterFromXML();
-                    case 'animalOriginReceivedDateImport': return importOriginReceivedDateFromXML();
-                }
-            }
-            else return generateImportStatement(item);
-        })
-        .then(() => sendSlackMessage('Path: /oneTimeImport', 'Finished all imports', true))
-        .catch((error) => sendSlackMessage('Path: /oneTimeImport', error.message));
+    executeAllJobs();
 });
 // endregion
 

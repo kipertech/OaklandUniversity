@@ -78,7 +78,7 @@ export function apiWrapper({
             {
                 if (!checkErrorExist(response))
                 {
-                    if (!noLogs) console.log(`[SUCCESS] ${functionName.toUpperCase()}`, response);
+                    if (process.env.IS_LOCAL === 'true' && !noLogs) console.log(`[SUCCESS] ${functionName.toUpperCase()}`, response);
                     completeFunc(response);
                     resolve(
                         hasPagination ?

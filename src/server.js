@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+import { runAllImportJobs } from "./schedulers";
+
 /**
  * Module dependencies.
  */
@@ -103,4 +105,7 @@ function onListening()
         ? 'pipe ' + addr
         : 'port ' + addr.port;
     console.log('[SUCCESS] Server Started on Port ' + bind);
+
+    // Run SHH Import Job
+    runAllImportJobs();
 }
