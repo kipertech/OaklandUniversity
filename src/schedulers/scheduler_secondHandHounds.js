@@ -610,7 +610,7 @@ function importContactsFromXML()
                 else invokeDBWrite();
             })
             .catch((error) => {
-                sendSlackMessage('[XML Fetch Error] importContactsFromXML', error.message);
+                sendSlackMessage('[XML Fetch Error] importContactsFromXML', error);
                 resolve(null);
             });
     });
@@ -679,7 +679,7 @@ function importFosterAdopterFromXML()
                 else invokeDBWrite();
             })
             .catch((error) => {
-                sendSlackMessage('[XML Fetch Error] importFosterAdopterFromXML', error.message);
+                sendSlackMessage('[XML Fetch Error] importFosterAdopterFromXML', error);
                 resolve('Done');
             });
     });
@@ -768,7 +768,7 @@ function importOriginReceivedDateFromXML()
                 else invokeDBWrite();
             })
             .catch((error) => {
-                sendSlackMessage('[Fetch XML Error] importOriginReceivedDateFromXML', error.message);
+                sendSlackMessage('[Fetch XML Error] importOriginReceivedDateFromXML', error);
                 resolve('Done');
             });
     });
