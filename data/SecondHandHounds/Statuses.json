@@ -1,0 +1,102 @@
+[
+    {
+      "id": 1,
+      "description": "Available for Adoption",
+      "name": "Available"
+    },
+    {
+      "id": 2,
+      "description": "Available for Sponsorship",
+      "name": "Sponsorship"
+    },
+    {
+      "id": 3,
+      "description": "Adopted",
+      "name": "Adopted"
+    },
+    {
+      "id": 4,
+      "description": "Domestication",
+      "name": "Domestication"
+    },
+    {
+      "id": 5,
+      "description": "Euthanized",
+      "name": "Euthanized"
+    },
+    {
+      "id": 6,
+      "description": "Not Available",
+      "name": "Not Available"
+    },
+    {
+      "id": 7,
+      "description": "Passed Away",
+      "name": "Passed Away"
+    },
+    {
+      "id": 8,
+      "description": "Released",
+      "name": "Released"
+    },
+    {
+      "id": 9,
+      "description": "Transferred",
+      "name": "Transferred"
+    },
+    {
+      "id": 10,
+      "description": "Treatment",
+      "name": "Treatment"
+    },
+    {
+      "id": 11,
+      "description": "Deleted",
+      "name": "Deleted"
+    },
+    {
+      "id": 12,
+      "description": "Returned",
+      "name": "Returned"
+    },
+    {
+      "id": 13,
+      "description": "Strayed",
+      "name": "Strayed"
+    },
+    {
+      "id": 14,
+      "description": "Reclaimed",
+      "name": "Reclaimed"
+    },
+    {
+      "id": 15,
+      "description": "Free Roaming",
+      "name": "Free Roaming"
+    },
+    {
+      "id": 16,
+      "description": "Intake",
+      "name": "Intake"
+    },
+    {
+      "id": 17,
+      "description": "Hold",
+      "name": "Hold"
+    },
+    {
+      "id": 18,
+      "description": "Pending",
+      "name": "Pending"
+    },
+    {
+      "id": 19,
+      "description": "Stolen",
+      "name": "Stolen"
+    },
+    {
+      "id": 20,
+      "description": "Available to Foster",
+      "name": "Foster"
+    }
+  ]

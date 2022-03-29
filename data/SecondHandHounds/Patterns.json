@@ -1,0 +1,62 @@
+ [
+    {
+      "id": 1,
+      "name": "Spots"
+    },
+    {
+      "id": 2,
+      "name": "Brindle"
+    },
+    {
+      "id": 3,
+      "name": "Merle"
+    },
+    {
+      "id": 4,
+      "name": "Patches"
+    },
+    {
+      "id": 5,
+      "name": "Bicolor"
+    },
+    {
+      "id": 6,
+      "name": "Tricolor"
+    },
+    {
+      "id": 7,
+      "name": "Spotted"
+    },
+    {
+      "id": 8,
+      "name": "Tabby"
+    },
+    {
+      "id": 9,
+      "name": "Calico"
+    },
+    {
+      "id": 10,
+      "name": "Tortie"
+    },
+    {
+      "id": 11,
+      "name": "Solid"
+    },
+    {
+      "id": 12,
+      "name": "Bicolor"
+    },
+    {
+      "id": 13,
+      "name": "Tricolor"
+    },
+    {
+      "id": 14,
+      "name": "Tuxedo"
+    },
+    {
+      "id": 15,
+      "name": "Cow"
+    }
+  ]

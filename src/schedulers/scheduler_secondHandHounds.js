@@ -686,12 +686,18 @@ function importFosterAdopterFromXML()
 }
 // endregion
 
-// region Function - Import Origin/Received Date from XML
+// region Function - Import Extra Animal Values from XML
 function importExtraAnimalValuesFromXML()
 {
     return new Promise((resolve) => {
         // Load mapping file
         const originMapping = require('../../data/SecondHandHounds/originMapping.json');
+
+        // Load Species File
+        let speciesList = require('../../data/SecondHandHounds/Species.json'),
+            colorList = require('../../data/SecondHandHounds/Colors.json'),
+            statusList = require('../../data/SecondHandHounds/Statuses.json'),
+            patternList = require('../../data/SecondHandHounds/Patterns.json');
 
         // Log time
         const startedAt = moment().unix();
@@ -704,17 +710,47 @@ function importExtraAnimalValuesFromXML()
                     "id": 'id',
                     "ReceivedDate": 'receivedDate',
                     "Origin": 'originRaw',
-                    "Species": 'speciesText'
+                    "Species": 'speciesText',
+                    "Status": 'statusText',
+                    "Pattern": 'patternText',
+                    "Color": 'colorText',
+                    "DaysInFoster": 'daysInFoster'
+                };
+
+                // Derived values list with their parsing functions
+                let derivedValues = {
+                    'speciesID': (item) => {
+                        let speciesID = speciesList.find((species) => species['singular']?.toLowerCase() === item['Species']?.toLowerCase())?.['id'] || 0;
+                        return(speciesID.toString());
+                    },
+                    'statusID': (item) => {
+                        let statusID = statusList.find((status) => status['name']?.toLowerCase() === item['Status']?.toLowerCase())?.['id'] || 0;
+                        return(statusID.toString());
+                    },
+                    'colorID': (item) => {
+                        let colorID = colorList.find((color) => color['name']?.toLowerCase() === item['Color']?.toLowerCase())?.['id'] || 0;
+                        return(colorID.toString());
+                    },
+                    'patternID': (item) => {
+                        let patternID = patternList.find((pattern) => pattern['name']?.toLowerCase() === item['Pattern']?.toLowerCase())?.['id'] || 0;
+                        return(patternID.toString());
+                    },
+                    'originParsed': (item) => {
+                        let originParsed = originMapping.find((origin) => origin['Origin'].toLowerCase() === item['Origin']?.toLowerCase())?.['Category'] || 'OS';
+                        return('"' + originParsed.replace(/\n/g, ' ').replace(/"/g, '') + '"');
+                    }
                 };
 
                 // Go over all items in the JSON array and parse them to the correct format we need
                 let sqlValues = [],
                     keyList = Object.keys(attributeMap),
-                    dbAttributeList = keyList.map((key) => attributeMap[key]).concat('originParsed');
+                    dbAttributeList = keyList.map((key) => attributeMap[key]).concat(Object.keys(derivedValues));
 
                 json.forEach((item) => {
-                    let originParsed = originMapping.find((origin) => origin['Origin'].toLowerCase() === item['Origin']?.toLowerCase())?.['Category'] || 'OS';
+                    // Generate derive values array
+                    let derivedValueArr = Object.keys(derivedValues).map((derivedField) => derivedValues[derivedField](item));
 
+                    // Push value statement
                     sqlValues.push(
                         '(' +
                         keyList
@@ -725,7 +761,7 @@ function importExtraAnimalValuesFromXML()
                                 }
                                 else return parseAttributeValue(item[attributeKey]);
                             })
-                            .concat('"' + originParsed.replace(/\n/g, ' ').replace(/"/g, '') + '"')
+                            .concat(derivedValueArr)
                             .join(', ') +
                         ')'
                     );
@@ -759,7 +795,7 @@ function importExtraAnimalValuesFromXML()
                 // Write to file for review
                 if (isLocal())
                 {
-                    writeFile(`./tempData/secondHandHounds_OriginReceivedDate.sql`, sqlStatement)
+                    writeFile(`./tempData/secondHandHounds_ExtraAnimalValues.sql`, sqlStatement)
                         .then(() => invokeDBWrite())
                         .catch((writeError) => {
                             invokeDBWrite();
@@ -798,7 +834,7 @@ secondHandHoundsRouter.post('/importExtraAnimalValuesFromXML', sloppyAuthenticat
     importExtraAnimalValuesFromXML();
 
     // Response first, notify result over Slack later
-    Success(response, 'Import Origin/Received Date from XML initiated, result will be notified via Slack');
+    Success(response, 'Import Extra Animal Values from XML initiated, result will be notified via Slack');
 });
 // endregion
 

@@ -1,0 +1,166 @@
+[
+    {
+        "id": 1,
+        "singular": "Alpaca"
+    },
+    {
+        "id": 2,
+        "singular": "Bird"
+    },
+    {
+        "id": 3,
+        "singular": "Cat"
+    },
+    {
+        "id": 4,
+        "singular": "Chicken"
+    },
+    {
+        "id": 5,
+        "singular": "Chinchilla"
+    },
+    {
+        "id": 6,
+        "singular": "Cow"
+    },
+    {
+        "id": 7,
+        "singular": "Degu"
+    },
+    {
+        "id": 8,
+        "singular": "Dog"
+    },
+    {
+        "id": 9,
+        "singular": "Donkey"
+    },
+    {
+        "id": 10,
+        "singular": "Duck"
+    },
+    {
+        "id": 11,
+        "singular": "Ferret"
+    },
+    {
+        "id": 12,
+        "singular": "Fish"
+    },
+    {
+        "id": 13,
+        "singular": "Frog"
+    },
+    {
+        "id": 14,
+        "singular": "Gecko"
+    },
+    {
+        "id": 15,
+        "singular": "Gerbil"
+    },
+    {
+        "id": 16,
+        "singular": "Goat"
+    },
+    {
+        "id": 17,
+        "singular": "Goose"
+    },
+    {
+        "id": 18,
+        "singular": "Groundhog"
+    },
+    {
+        "id": 19,
+        "singular": "Guinea Pig"
+    },
+    {
+        "id": 20,
+        "singular": "Hamster"
+    },
+    {
+        "id": 21,
+        "singular": "Hedgehog"
+    },
+    {
+        "id": 22,
+        "singular": "Hermit Crab"
+    },
+    {
+        "id": 23,
+        "singular": "Horse"
+    },
+    {
+        "id": 24,
+        "singular": "Iguana"
+    },
+    {
+        "id": 25,
+        "singular": "Lizard"
+    },
+    {
+        "id": 26,
+        "singular": "Llama"
+    },
+    {
+        "id": 27,
+        "singular": "Mouse"
+    },
+    {
+        "id": 28,
+        "singular": "Otter"
+    },
+    {
+        "id": 29,
+        "singular": "Pig"
+    },
+    {
+        "id": 30,
+        "singular": "Pony"
+    },
+    {
+        "id": 31,
+        "singular": "Prairie Dog"
+    },
+    {
+        "id": 32,
+        "singular": "Rabbit"
+    },
+    {
+        "id": 33,
+        "singular": "Rat"
+    },
+    {
+        "id": 34,
+        "singular": "Sheep"
+    },
+    {
+        "id": 35,
+        "singular": "Skunk"
+    },
+    {
+        "id": 36,
+        "singular": "Snake"
+    },
+    {
+        "id": 37,
+        "singular": "Sugar Glider"
+    },
+    {
+        "id": 38,
+        "singular": "Tarantula"
+    },
+    {
+        "id": 39,
+        "singular": "Tortoise"
+    },
+    {
+        "id": 40,
+        "singular": "Turkey"
+    },
+    {
+        "id": 41,
+        "singular": "Turtle"
+    }
+]
