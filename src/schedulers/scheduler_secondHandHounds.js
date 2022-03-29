@@ -687,7 +687,7 @@ function importFosterAdopterFromXML()
 // endregion
 
 // region Function - Import Origin/Received Date from XML
-function importOriginReceivedDateFromXML()
+function importExtraAnimalValuesFromXML()
 {
     return new Promise((resolve) => {
         // Load mapping file
@@ -703,7 +703,8 @@ function importOriginReceivedDateFromXML()
                 let attributeMap = {
                     "id": 'id',
                     "ReceivedDate": 'receivedDate',
-                    "Origin": 'originRaw'
+                    "Origin": 'originRaw',
+                    "Species": 'speciesText'
                 };
 
                 // Go over all items in the JSON array and parse them to the correct format we need
@@ -762,13 +763,13 @@ function importOriginReceivedDateFromXML()
                         .then(() => invokeDBWrite())
                         .catch((writeError) => {
                             invokeDBWrite();
-                            sendSlackMessage('[Write File Error] importOriginReceivedDateFromXML', writeError.message);
+                            sendSlackMessage('[Write File Error] importExtraAnimalValuesFromXML', writeError.message);
                         });
                 }
                 else invokeDBWrite();
             })
             .catch((error) => {
-                sendSlackMessage('[Fetch XML Error] importOriginReceivedDateFromXML', error);
+                sendSlackMessage('[Fetch XML Error] importExtraAnimalValuesFromXML', error);
                 resolve('Done');
             });
     });
@@ -792,9 +793,9 @@ secondHandHoundsRouter.post('/importFosterAdopterXML', sloppyAuthenticate, (requ
     Success(response, 'Import Foster/Adopter from XML initiated, result will be notified via Slack');
 });
 
-secondHandHoundsRouter.post('/importOriginReceivedDateXML', sloppyAuthenticate, (request, response) => {
+secondHandHoundsRouter.post('/importExtraAnimalValuesFromXML', sloppyAuthenticate, (request, response) => {
     // Call function
-    importOriginReceivedDateFromXML();
+    importExtraAnimalValuesFromXML();
 
     // Response first, notify result over Slack later
     Success(response, 'Import Origin/Received Date from XML initiated, result will be notified via Slack');
@@ -940,7 +941,7 @@ function executeAllJobs(isScheduler = false)
                     {
                         case 'contactImport': return importContactsFromXML();
                         case 'animalFosterAdopterImport': return importFosterAdopterFromXML();
-                        case 'animalOriginReceivedDateImport': return importOriginReceivedDateFromXML();
+                        case 'animalOriginReceivedDateImport': return importExtraAnimalValuesFromXML();
                     }
                 }
                 else return generateImportStatement(item);
