@@ -1769,7 +1769,7 @@ profTomlinRouter.post('/exportCombinedSIC', (request, response) => {
 profTomlinRouter.get('/2digitTariff', (request, response) => {
     let filePath = "D:\\Drive\\Classes\\Oakland\\GA\\Prof Tomlin\\Tariff Project\\Tariff - SIC 2 Digits\\tariff_database_master.xlsx";
 
-    const startingJSON = require('../../tempData/profTomlin_combinedTariff_2Digits.json');
+    const startingJSON = require('../../tempData/profTomlin_combinedTariff_2Digits_Agglom.json');
 
     const workbook = new ExcelJS.Workbook();
 
@@ -1831,7 +1831,7 @@ profTomlinRouter.get('/2digitTariff', (request, response) => {
 
 // region POST - Fill MFN and COL
 profTomlinRouter.post('/naics/fillMFNandCOL', (request, response) => {
-    let codeFile = require('../../tempData/profTomlin_combinedTariff_2Digits.json'),
+    let codeFile = require('../../tempData/profTomlin_combinedTariff_2Digits_Agglom.json'),
         fillingFilePath = "D:\\Drive\\Classes\\Oakland\\GA\\Prof Tomlin\\NAICS Unemployment Rate\\profTomlin_combinedSIC_2digits.xlsx";
 
     const workbook = new ExcelJS.Workbook();
@@ -1862,6 +1862,103 @@ profTomlinRouter.post('/naics/fillMFNandCOL', (request, response) => {
 });
 // endregion
 
+// endregion
+
+// region --- TARIFF WITH AGGLOMERATION ---
+profTomlinRouter.get('/agglomerationData', (request, response) => {
+    const filePath = "D:\\Drive\\Classes\\Oakland\\GA\\Prof Tomlin\\Agglomeration\\profTomlin_AgglomerationData_ForeignFirms_Full.xlsx";
+
+    let dataObj = {};
+
+    const workbook = new ExcelJS.Workbook();
+    workbook.xlsx.readFile(filePath)
+        .then((workbookContent) => {
+            const worksheet = workbookContent.worksheets[0];
+            worksheet.eachRow((row, rowNumber) => {
+                if (rowNumber > 1)
+                {
+                    let rowValues = row.values,
+                        sic = rowValues[2],
+                        state = rowValues[4],
+                        year = rowValues[5],
+                        count = rowValues[6];
+
+                    if (!dataObj[sic]) dataObj[sic] = {};
+                    if (!dataObj[sic][state]) dataObj[sic][state] = {};
+                    if (!dataObj[sic][state][year]) dataObj[sic][state][year] = count;
+                }
+            });
+
+            // Write to file
+            writeFile(`./tempData/profTomlin_combinedTariff_2Digits.json`, JSON.stringify(dataObj, null, 4))
+                .then(() => Success(response, 'Successfully fetch combined SIC data', dataObj))
+                .catch((writeError) => Abort(response, 'Write Error', 500, writeError.message));
+        })
+        .catch((error) => Abort(response, 'Failed to read file', 500, error.message));
+});
+// endregion
+
+// region --- TARIFF WITH AGGLOMERATION ---
+profTomlinRouter.post('/writeAgglomerationData', (request, response) => {
+    const codeFile = require('../../tempData/profTomlin_combinedTariff_2Digits_Agglom.json');
+    const filePath = "D:\\Drive\\Classes\\Oakland\\GA\\Prof Tomlin\\Agglomeration\\profTomlin_combinedSIC_2digits.xlsx";
+
+    const workbook = new ExcelJS.Workbook();
+    workbook.xlsx.readFile(filePath)
+        .then((workbookContent) => {
+            const worksheet = workbookContent.worksheets[0];
+            worksheet.eachRow((row, rowNumber) => {
+                if (rowNumber > 1)
+                {
+                    let rowValues = row.values,
+                        sic = rowValues[1]?.toString(),
+                        year = rowValues[2]?.toString(),
+                        state = rowValues[3]?.toString();
+
+                    worksheet.getCell(rowNumber, 4).value = codeFile[sic]?.[state]?.[year] || '';
+                    row.commit();
+                }
+            });
+
+            workbook.xlsx.writeFile(filePath)
+                .then(() => Success(response, 'Successfully write file'))
+                .catch((writeError) => Abort(response, 'Failed to write file', 500, writeError.message));
+        })
+        .catch((error) => Abort(response, 'Failed to read file', 500, error.message));
+});
+// endregion
+
+// region --- TARIFF WITH AGGLOMERATION ---
+profTomlinRouter.post('/fillAgglomerationData', (request, response) => {
+    const filePath = "D:\\Drive\\Classes\\Oakland\\GA\\Prof Tomlin\\Agglomeration\\profTomlin_combinedSIC_2digits.xlsx";
+
+    const workbook = new ExcelJS.Workbook();
+    workbook.xlsx.readFile(filePath)
+        .then((workbookContent) => {
+            const worksheet = workbookContent.worksheets[0];
+            worksheet.eachRow((row, rowNumber) => {
+                if (rowNumber > 2)
+                {
+                    let rowValues = row.values,
+                        sic = rowValues[1]?.toString(),
+                        state = rowValues[3]?.toString(),
+                        currentAgglomData = rowValues[4]?.toString().trim();
+
+                    let previousSIC = worksheet.getCell(rowNumber - 1, 1).value,
+                        previousState = worksheet.getCell(rowNumber - 1, 3).value,
+                        previousAgglomData = (sic?.toString() === previousSIC?.toString() && state?.trim() === previousState?.trim()) ? worksheet.getCell(rowNumber - 1, 4) : 0;
+
+                    worksheet.getCell(rowNumber, 4).value = Number(currentAgglomData || previousAgglomData || 0);
+                    row.commit();
+                }
+            });
+
+            workbook.xlsx.writeFile(filePath)
+                .then(() => Success(response, 'Successfully write file'))
+                .catch((writeError) => Abort(response, 'Failed to write file', 500, writeError.message));
+        })
+        .catch((error) => Abort(response, 'Failed to read file', 500, error.message));
+});
 // endregion
 
 export default profTomlinRouter;
