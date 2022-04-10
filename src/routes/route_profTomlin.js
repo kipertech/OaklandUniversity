@@ -1960,7 +1960,7 @@ profTomlinRouter.post('/fillAgglomerationData', (request, response) => {
 });
 // endregion
 
-// region FDIBEA
+// region --- FDIBEA ---
 profTomlinRouter.post('/fdibea/fillSIC', (request, response) => {
     const mappingFile = require('../../data/ProfTomlin/IndustryMapping.json');
     let filePath = "/Users/kipertech/Google Drive/Classes/Oakland/GA/Prof Tomlin/FDIBEA/2000_2019.xlsx";
@@ -1988,6 +1988,108 @@ profTomlinRouter.post('/fdibea/fillSIC', (request, response) => {
                 });
             }
 
+            workbook.xlsx.writeFile(filePath)
+                .then(() => Success(response, 'Successfully write file'))
+                .catch((writeError) => Abort(response, 'Failed to write file', 500, writeError.message));
+        })
+        .catch((error) => Abort(response, 'Failed to read file', 500, error.message));
+});
+// endregion
+
+// region --- GAD ---
+profTomlinRouter.get('/gad/mappingFile', (request, response) => {
+    let filePath = "D:\\Drive\\Classes\\Oakland\\GA\\Prof Tomlin\\GAD\\Mapping.xlsx";
+
+    const workbook = new ExcelJS.Workbook();
+    workbook.xlsx.readFile(filePath)
+        .then((workbookContent) => {
+            let writeObj = {};
+
+            const worksheet = workbookContent.worksheets[0];
+            worksheet.eachRow((row, rowNumber) => {
+                if (rowNumber > 1)
+                {
+                    let rowValues = row.values,
+                        itcCode = rowValues[1]?.toString()?.trim(),
+                        firmName = rowValues[2]?.toString()?.trim(),
+                        fadMeasure = rowValues[3]?.toString() !== '.' ? Number(Number(rowValues[3]).toFixed(2)) : '.';
+
+                    if (!writeObj[itcCode]) writeObj[itcCode] = [];
+                    writeObj[itcCode].push({ firmName, fadMeasure });
+                }
+            });
+
+            // Write to JSON
+            writeFile(`./tempData/profTomlin_GAD_Mapping.json`, JSON.stringify(writeObj, null, 4))
+                .then(() => Success(response, 'Successfully write GAD Mapping File', writeObj))
+                .catch((writeError) => Abort(response, 'Write Error', 500, writeError.message));
+        })
+        .catch((error) => Abort(response, 'Failed to read file', 500, error.message));
+});
+
+profTomlinRouter.post('/gad/fillFile', (request, response) => {
+    let filePath = "D:\\Drive\\Classes\\Oakland\\GA\\Prof Tomlin\\GAD\\GAD-USA.xlsx";
+    const mappingFile = require('../../tempData/profTomlin_GAD_Mapping.json');
+
+    const workbook = new ExcelJS.Workbook();
+    workbook.xlsx.readFile(filePath)
+        .then((workbookContent) => {
+            const worksheet = workbookContent.worksheets[0];
+
+            let currentRowCount = worksheet.rowCount;
+
+            // Keep record of processed row to ignore them
+            let processedRow = [],
+                currentRowNumber = 2;
+
+            console.log('currentRowCount', currentRowCount);
+
+            // Go through all rows
+            while (currentRowNumber <= currentRowCount)
+            {
+                if (!processedRow.includes(currentRowNumber))
+                {
+                    let rowValues = worksheet.getRow(currentRowNumber).values,
+                        itcCode = rowValues[28]?.toString()?.trim(),
+                        companyList = mappingFile[itcCode];
+
+                    if (currentRowNumber === 2) console.log(rowValues);
+
+                    if (companyList && (companyList.length > 0))
+                    {
+                        let totalRows = companyList.length;
+
+                        // Duplicate the rows according to how many firms have the same ITC code
+                        if (totalRows > 1)
+                        {
+                            console.log('Before', currentRowCount);
+                            worksheet.duplicateRow(currentRowNumber, totalRows - 1, true);
+                            currentRowCount = worksheet.rowCount;
+                            console.log('After', currentRowCount);
+                        }
+
+                        // Fill the data in for all current rows
+                        for (let i = currentRowNumber; i <= (currentRowNumber + totalRows - 1); ++i)
+                        {
+                            // ITC: 28; Firm Name: 29; FAD: 30
+                            const firmData = companyList[i - currentRowNumber];
+                            worksheet.getCell(i, 29).value = firmData?.firmName;
+                            worksheet.getCell(i, 30).value = firmData?.fadMeasure;
+                            worksheet.getRow(i).commit();
+
+                            // Push this row to processed stack
+                            processedRow.push(i);
+                        }
+                    }
+                }
+
+                // Increase count
+                currentRowNumber += 1;
+            }
+
+            console.log('currentRowCount', currentRowCount);
+
+            // Write to file
             workbook.xlsx.writeFile(filePath)
                 .then(() => Success(response, 'Successfully write file'))
                 .catch((writeError) => Abort(response, 'Failed to write file', 500, writeError.message));
