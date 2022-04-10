@@ -30,7 +30,7 @@ app.set('port', port);
  * Fake SSL key for localhost is also added
  */
 
-let server = process.env.IS_LOCAL === 'true' ? https.createServer({ key, cert }, app) : http.createServer(app);
+let server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -107,5 +107,5 @@ function onListening()
     console.log('[SUCCESS] Server Started on Port ' + bind);
 
     // Run SHH Import Job
-    runAllImportJobs();
+    if (process.env.IS_LOCAL !== 'true') runAllImportJobs();
 }

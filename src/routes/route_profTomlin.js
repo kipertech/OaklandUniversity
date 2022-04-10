@@ -10,6 +10,7 @@ import {
     Success
 } from '../utils';
 import codeFile from "../../tempData/profTomlin_hts8Codes.json";
+import mappingFile from "../../data/ProfTomlin/IndustryMapping.json";
 
 let profTomlinRouter = Router();
 
@@ -1016,6 +1017,8 @@ profTomlinRouter.post('/tariff/fillCodes2', (request, response) => {
 
 // endregion
 
+// endregion
+
 // region --- COMPENSATION LOBBY ---
 
 // region POST - Lobby data into Master file
@@ -1896,9 +1899,7 @@ profTomlinRouter.get('/agglomerationData', (request, response) => {
         })
         .catch((error) => Abort(response, 'Failed to read file', 500, error.message));
 });
-// endregion
 
-// region --- TARIFF WITH AGGLOMERATION ---
 profTomlinRouter.post('/writeAgglomerationData', (request, response) => {
     const codeFile = require('../../tempData/profTomlin_combinedTariff_2Digits_Agglom.json');
     const filePath = "D:\\Drive\\Classes\\Oakland\\GA\\Prof Tomlin\\Agglomeration\\profTomlin_combinedSIC_2digits.xlsx";
@@ -1926,9 +1927,7 @@ profTomlinRouter.post('/writeAgglomerationData', (request, response) => {
         })
         .catch((error) => Abort(response, 'Failed to read file', 500, error.message));
 });
-// endregion
 
-// region --- TARIFF WITH AGGLOMERATION ---
 profTomlinRouter.post('/fillAgglomerationData', (request, response) => {
     const filePath = "D:\\Drive\\Classes\\Oakland\\GA\\Prof Tomlin\\Agglomeration\\profTomlin_combinedSIC_2digits.xlsx";
 
@@ -1952,6 +1951,42 @@ profTomlinRouter.post('/fillAgglomerationData', (request, response) => {
                     row.commit();
                 }
             });
+
+            workbook.xlsx.writeFile(filePath)
+                .then(() => Success(response, 'Successfully write file'))
+                .catch((writeError) => Abort(response, 'Failed to write file', 500, writeError.message));
+        })
+        .catch((error) => Abort(response, 'Failed to read file', 500, error.message));
+});
+// endregion
+
+// region FDIBEA
+profTomlinRouter.post('/fdibea/fillSIC', (request, response) => {
+    const mappingFile = require('../../data/ProfTomlin/IndustryMapping.json');
+    let filePath = "/Users/kipertech/Google Drive/Classes/Oakland/GA/Prof Tomlin/FDIBEA/2000_2019.xlsx";
+
+    const workbook = new ExcelJS.Workbook();
+    workbook.xlsx.readFile(filePath)
+        .then((workbookContent) => {
+            let worksheetCount = workbookContent.worksheets.length;
+
+            for (let i = 1; i < worksheetCount; ++i) // First worksheet already filled
+            {
+                const worksheet = workbookContent.worksheets[i];
+                worksheet.eachRow((row, rowNumber) => {
+                    if (rowNumber > 1)
+                    {
+                        let rowValues = row.values,
+                            name = rowValues[1]?.toString();
+
+                        if (name?.trim())
+                        {
+                            worksheet.getCell(rowNumber, 2).value = mappingFile.find((item) => item.name.trim().toLowerCase() === name.toLowerCase().trim())?.['sic'] || '';
+                            row.commit();
+                        }
+                    }
+                });
+            }
 
             workbook.xlsx.writeFile(filePath)
                 .then(() => Success(response, 'Successfully write file'))
