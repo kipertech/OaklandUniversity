@@ -11,6 +11,7 @@ import {
 } from '../utils';
 import codeFile from "../../tempData/profTomlin_hts8Codes.json";
 import mappingFile from "../../data/ProfTomlin/IndustryMapping.json";
+import fdiMapping from "../../tempData/profTomlin_FDI_Mapping.json";
 
 let profTomlinRouter = Router();
 
@@ -1994,6 +1995,83 @@ profTomlinRouter.post('/fdibea/fillSIC', (request, response) => {
         })
         .catch((error) => Abort(response, 'Failed to read file', 500, error.message));
 });
+
+profTomlinRouter.post('/fdibea/extractData', (request, response) => {
+    let filePath = "D:\\Drive\\Classes\\Oakland\\GA\\Prof Tomlin\\FDIBEA\\2000_2019.xlsx";
+
+    const workbook = new ExcelJS.Workbook();
+    workbook.xlsx.readFile(filePath)
+        .then((workbookContent) => {
+            let worksheetCount = workbookContent.worksheets.length,
+                writeObj = {};
+
+            for (let i = 0; i < worksheetCount; ++i) // First worksheet already filled
+            {
+                let year = i + 2000;
+                if (!writeObj[year]) writeObj[year] = {};
+
+                // Go through all industry codes
+                const worksheet = workbookContent.worksheets[i];
+                worksheet.eachRow((row, rowNumber) => {
+                    if (rowNumber > 1)
+                    {
+                        let rowValues = row.values,
+                            sic = rowValues[2]?.toString(),
+                            assetValue = isNaN(rowValues[3]) ? 0 : Number(rowValues[3]),
+                            propertyValue = isNaN(rowValues[4]) ? 0 : Number(rowValues[4]);
+
+                        if (sic)
+                        {
+                            if (writeObj[year][sic])
+                            {
+                                writeObj[year][sic]['assetValue'] += assetValue;
+                                writeObj[year][sic]['propertyValue'] += propertyValue;
+                            }
+                            else writeObj[year][sic] = { assetValue, propertyValue };
+                        }
+                    }
+                });
+            }
+
+            // Write to JSON
+            writeFile(`./tempData/profTomlin_FDI_Mapping.json`, JSON.stringify(writeObj, null, 4))
+                .then(() => Success(response, 'Successfully write FDIBEA Mapping File', writeObj))
+                .catch((writeError) => Abort(response, 'Write Error', 500, writeError.message));
+        })
+        .catch((error) => Abort(response, 'Failed to read file', 500, error.message));
+});
+
+profTomlinRouter.post('/fdibea/fill2DigitFile', (request, response) => {
+    const fdiMapping = require('../../tempData/profTomlin_FDI_Mapping.json');
+    let filePath = "D:\\Drive\\Classes\\Oakland\\GA\\Prof Tomlin\\FDIBEA\\profTomlin_combinedSIC_2digits.xlsx";
+
+    const workbook = new ExcelJS.Workbook();
+    workbook.xlsx.readFile(filePath)
+        .then((workbookContent) => {
+            const worksheet = workbookContent.worksheets[0];
+            worksheet.eachRow((row, rowNumber) => {
+                if (rowNumber > 1)
+                {
+                    let rowValues = row.values,
+                        sic = rowValues[1]?.toString(),
+                        year = rowValues[2]?.toString();
+
+                    let assetValue = fdiMapping[year]?.[sic]?.['assetValue'],
+                        propertyValue = fdiMapping[year]?.[sic]?.['propertyValue'];
+
+                    worksheet.getCell(rowNumber, 4).value = assetValue ? (assetValue > 0 ? assetValue : '.') : '.';
+                    worksheet.getCell(rowNumber, 5).value = propertyValue ? (propertyValue > 0 ? propertyValue : '.') : '.';
+
+                    row.commit();
+                }
+            });
+
+            workbook.xlsx.writeFile(filePath)
+                .then(() => Success(response, 'Successfully write file'))
+                .catch((writeError) => Abort(response, 'Failed to write file', 500, writeError.message));
+        })
+        .catch((error) => Abort(response, 'Failed to read file', 500, error.message));
+});
 // endregion
 
 // region --- GAD ---
@@ -2062,10 +2140,8 @@ profTomlinRouter.post('/gad/fillFile', (request, response) => {
                         // Duplicate the rows according to how many firms have the same ITC code
                         if (totalRows > 1)
                         {
-                            console.log('Before', currentRowCount);
                             worksheet.duplicateRow(currentRowNumber, totalRows - 1, true);
                             currentRowCount = worksheet.rowCount;
-                            console.log('After', currentRowCount);
                         }
 
                         // Fill the data in for all current rows
@@ -2086,8 +2162,6 @@ profTomlinRouter.post('/gad/fillFile', (request, response) => {
                 // Increase count
                 currentRowNumber += 1;
             }
-
-            console.log('currentRowCount', currentRowCount);
 
             // Write to file
             workbook.xlsx.writeFile(filePath)
