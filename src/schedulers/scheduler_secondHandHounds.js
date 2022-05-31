@@ -1,8 +1,5 @@
-import sendSlackMessage from "../utils/util_slack";
-
 require('dotenv').config();
 
-import fetch from 'node-fetch';
 import {
     ToadScheduler,
     SimpleIntervalJob,
@@ -13,15 +10,16 @@ import nodeScheduler from 'node-schedule';
 import moment from 'moment-timezone';
 import MySQL from 'mysql';
 import { Promise } from "bluebird";
+import { writeFile } from "fs/promises";
 
 // Helpers
+import { sloppyAuthenticate } from "../middlewares/middleware_authentication";
 import { apiWrapper, apiWrapperXML } from "../utils/util_api_helpers";
 import {
     isObject,
     Success
 } from "../utils";
-import { writeFile } from "fs/promises";
-import { sloppyAuthenticate } from "../middlewares/middleware_authentication";
+import sendSlackMessage from "../utils/util_slack";
 
 // Define scheduler
 const scheduler = new ToadScheduler();
@@ -308,7 +306,7 @@ function parseAttributeValue(attributeValue)
         {
             if (isNaN(attributeValue))
             {
-                returnValue = '"' + attributeValue.replace(/"/g, "'") + '"';
+                returnValue = '"' + attributeValue.replace(/"/g, "'").replace(new RegExp("\'", 'g'), "''") + '"';
             }
             else returnValue = Number(attributeValue);
             break;
