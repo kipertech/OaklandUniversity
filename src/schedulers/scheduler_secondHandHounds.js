@@ -94,9 +94,9 @@ function updateSchedulerConfig(jobID, nextRunAt)
 
             connection
                 .request()
-                .input('nextRunAt', Number, nextRunAt)
-                .input('updatedAt', Number, moment().unix())
-                .input('id', Number, jobID)
+                .input('nextRunAt', mssql.Int, nextRunAt)
+                .input('updatedAt', mssql.Int, moment().unix())
+                .input('id', mssql.Int, jobID)
                 .query(`UPDATE dbo.SchedulerConfigs SET nextRunAt = @nextRunAt, updatedAt = @updatedAt WHERE id = @id`)
                 .then(() => connection.close())
                 .catch((error) => {
@@ -1043,10 +1043,18 @@ secondHandHoundsRouter.post('/oneTimeImport', sloppyAuthenticate, (request, resp
 // endregion
 
 // region GET - Latest Scheduler Config Item
-secondHandHoundsRouter.post('/schedulerConfigItem', sloppyAuthenticate, (request, response) =>
+secondHandHoundsRouter.get('/schedulerConfigItem', sloppyAuthenticate, (request, response) =>
 {
     getSchedulerConfig('fullJobFetch')
         .then((result) => Success(response, 'Successfully got data', result));
+});
+// endregion
+
+// region GET - Update Scheduler Config Item
+secondHandHoundsRouter.patch('/schedulerConfigItem', sloppyAuthenticate, (request, response) =>
+{
+    updateSchedulerConfig(1, moment('2022-06-03 06:00:00', 'YYYY-MM-DD HH:mm:ss').tz('America/Detroit').unix());
+    Success(response, 'Successfully updated scheduler config');
 });
 // endregion
 

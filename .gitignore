@@ -36,3 +36,7 @@ rebar/*
 .idea/
 .env
 tempData/
+
+# Lock files, to work with Azure App Service
+yarn.lock
+package-lock.json
