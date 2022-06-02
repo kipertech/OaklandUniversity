@@ -9,6 +9,7 @@ import { Router } from "express";
 import nodeScheduler from 'node-schedule';
 import moment from 'moment-timezone';
 import MySQL from 'mysql';
+import mssql from 'mssql';
 import { Promise } from "bluebird";
 import { writeFile } from "fs/promises";
 
@@ -38,15 +39,22 @@ function isLocal()
 // region Function - Start RDS Database
 export function getMySQLConnection()
 {
-    let connection = MySQL.createConnection({
-        host: process.env.RDS_HOSTNAME,
-        user: process.env.RDS_USERNAME,
-        password: process.env.RDS_PASSWORD,
-        database: process.env.RDS_DB_NAME,
-        port: process.env.RDS_PORT
-    });
+    return new Promise((resolve) => {
+        const sqlConfig = {
+            user: process.env.RDS_USERNAME,
+            password: process.env.RDS_PASSWORD,
+            database: process.env.RDS_DB_NAME,
+            server: process.env.RDS_HOSTNAME,
+            options: { encrypt: true }
+        };
 
-    return(connection);
+        mssql.connect(sqlConfig)
+            .then((connection) => resolve(connection))
+            .catch((error) => {
+                resolve(null);
+                sendSlackMessage('[FAILED] Connect to Azure SQL', error);
+            });
+    });
 }
 // endregion
 
@@ -55,29 +63,24 @@ function getSchedulerConfig(jobName)
 {
     return new Promise((resolve) =>
     {
-        const connection = getMySQLConnection();
+        getMySQLConnection()
+            .then((connection) => {
+                if (!connection) resolve(null);
 
-        connection.query(
-            {
-                sql: "SELECT * FROM SchedulerConfigs WHERE name = ?",
-                timeout: 10000,
-                values: [jobName]
-            },
-            (error, results) =>
-            {
-                if (error)
-                {
-                    connection.end();
-                    sendSlackMessage('Fetching SchedulerConfigs', error.sqlMessage);
-                    resolve(null);
-                }
-                else
-                {
-                    connection.end();
-                    resolve(results[0]);
-                }
-            }
-        );
+                connection
+                    .request()
+                    .input('jobName', mssql.Text, jobName)
+                    .query(`SELECT * FROM dbo.SchedulerConfigs WHERE name LIKE @jobName`)
+                    .then((result) => {
+                        connection.close();
+                        resolve(result['recordset'][0]);
+                    })
+                    .catch((error) => {
+                        connection.close();
+                        sendSlackMessage('Fetching SchedulerConfigs', error.message);
+                        resolve(null);
+                    });
+            });
     });
 }
 // endregion
@@ -85,24 +88,22 @@ function getSchedulerConfig(jobName)
 // region Query - Update Scheduler Next Run
 function updateSchedulerConfig(jobID, nextRunAt)
 {
-    const connection = getMySQLConnection();
+    getMySQLConnection()
+        .then((connection) => {
+            if (!connection) return;
 
-    connection.query(
-        {
-            sql: "UPDATE SchedulerConfigs SET nextRunAt = ?, updatedAt = ? WHERE id = ?",
-            timeout: 10000,
-            values: [nextRunAt, moment().unix(), jobID]
-        },
-        (error) =>
-        {
-            if (error)
-            {
-                connection.end();
-                sendSlackMessage('Updated SchedulerConfigs', error.sqlMessage);
-            }
-            else connection.end();
-        }
-    );
+            connection
+                .request()
+                .input('nextRunAt', Number, nextRunAt)
+                .input('updatedAt', Number, moment().unix())
+                .input('id', Number, jobID)
+                .query(`UPDATE dbo.SchedulerConfigs SET nextRunAt = @nextRunAt, updatedAt = @updatedAt WHERE id = @id`)
+                .then(() => connection.close())
+                .catch((error) => {
+                    connection.close();
+                    sendSlackMessage('updateSchedulerConfig', error.message);
+                });
+        });
 }
 // endregion
 
@@ -111,34 +112,27 @@ function addSchedulerConfig(jobName, nextRunAt)
 {
     return new Promise((resolve) =>
     {
-        const connection = getMySQLConnection();
+        getMySQLConnection()
+            .then((connection) => {
+                if (!connection) return;
 
-        connection.query(
-            {
-                sql: "INSERT INTO SchedulerConfigs SET ?",
-                timeout: 10000,
-                values: {
-                    name: jobName,
-                    nextRunAt: nextRunAt,
-                    createdAt: moment().unix(),
-                    updatedAt: moment().unix()
-                }
-            },
-            (error, result) =>
-            {
-                if (error)
-                {
-                    connection.end();
-                    sendSlackMessage('Add New SchedulerConfigs', error.sqlMessage);
-                    resolve(null);
-                }
-                else
-                {
-                    connection.end();
-                    resolve(result['insertId']);
-                }
-            }
-        );
+                connection
+                    .request()
+                    .input('name', String, jobName)
+                    .input('nextRunAt', Number, nextRunAt)
+                    .input('createdAt', Number, moment().unix())
+                    .input('updatedAt', Number, moment().unix())
+                    .query(`INSERT INTO dbo.SchedulerConfigs (name, nextRunAt, createdAt, updatedAt) VALUES (@name, @nextRunAt, @createdAt, @updatedAt)`)
+                    .then((result) => {
+                        connection.close();
+                        resolve(result['recordset'][0]);
+                    })
+                    .catch((error) => {
+                        connection.close();
+                        sendSlackMessage('addSchedulerConfig', error.message);
+                        resolve(null);
+                    });
+            });
     });
 }
 // endregion
@@ -290,11 +284,11 @@ function parseAttributeValue(attributeValue)
     // Check arrays and objects
     if (Array.isArray(attributeValue))
     {
-        return('"' + attributeValue.map((item) => JSON.stringify(item)).join('-').replace(/"/g, '') + '"');
+        return("'" + attributeValue.map((item) => JSON.stringify(item)).join('-').replace(/"/g, '') + "'");
     }
     else if (isObject(attributeValue))
     {
-        return('"' + JSON.stringify(attributeValue).replace(/,/g, '-') + '"');
+        return("'" + JSON.stringify(attributeValue).replace(/,/g, '-') + "'");
     }
 
     // Other common types
@@ -306,14 +300,14 @@ function parseAttributeValue(attributeValue)
         {
             if (isNaN(attributeValue))
             {
-                returnValue = '"' + attributeValue.replace(/"/g, "'").replace(new RegExp("\'", 'g'), "''") + '"';
+                returnValue = "'" + attributeValue.replace(/'/g, "'").replace(new RegExp("\'", 'g'), "''") + "'";
             }
-            else returnValue = Number(attributeValue);
+            else returnValue = "'" + Number(attributeValue)?.toString() + "'";
             break;
         }
         case "number":
         {
-            returnValue = Number(attributeValue);
+            returnValue = "'" + Number(attributeValue)?.toString() + "'";
             break;
         }
         case "boolean":
@@ -323,7 +317,7 @@ function parseAttributeValue(attributeValue)
         }
         default:
         {
-            returnValue = '"' + JSON.stringify(attributeValue).replace(/"/g, "'") + '"';
+            returnValue = "'" + JSON.stringify(attributeValue).replace(/"/g, "''") + "'";
             break;
         }
     }
@@ -370,7 +364,7 @@ function generateImportStatement({ jobName, apiLink, tableName, dbAttributeNames
                                     let recordValueList = apiResult.data.map((item) =>
                                     {
                                         // Add the ID in
-                                        let recordValues = `(${Number(item.id)}`;
+                                        let recordValues = `${Number(item.id)}`;
 
                                         // Add other attributes in, must be in order of the items in dbAttributeNames
                                         // If any value missing, put in NULL
@@ -386,15 +380,12 @@ function generateImportStatement({ jobName, apiLink, tableName, dbAttributeNames
                                             else recordValues += `, NULL`;
                                         });
 
-                                        // Add closing parenthesis
-                                        recordValues += ')';
-
                                         // Return
                                         return recordValues;
                                     });
 
                                     // Resolve API call
-                                    apiResolve(recordValueList.join(',\n'));
+                                    apiResolve(recordValueList);
                                 })
                                 .catch((error) =>
                                 {
@@ -403,32 +394,45 @@ function generateImportStatement({ jobName, apiLink, tableName, dbAttributeNames
                                 });
                         }, 2000);
                     }))
-                    .then((bigRecordValueList) =>
+                    .then((arrayOfArrays) =>
                     {
+                        let finalArr = [];
+                        arrayOfArrays.forEach((singleArr) => finalArr = finalArr.concat(singleArr));
+
                         // Call INSERT statement
                         let sqlStatement =
-                            `INSERT INTO ${tableName} (id, ${dbAttributeNames.join(', ')})\n` +
-                            'VALUES\n' +
-                            bigRecordValueList.join(',\n') +
-                            '\nON DUPLICATE KEY UPDATE\n' +
-                            dbAttributeNames.map((item) => (item + ' = VALUES(' + item + ')')).join(',\n');
+                            finalArr.map((row) => (
+                                `MERGE INTO dbo.${tableName} AS t` +
+                                ` USING (SELECT ${row}) AS s (id, ${dbAttributeNames.join(', ')}) ON t.id = s.id` +
+                                ` WHEN MATCHED THEN UPDATE SET ${dbAttributeNames.map((attributeName) => `t.${attributeName} = s.${attributeName}`).join(', ')}` +
+                                ` WHEN NOT MATCHED THEN INSERT (id, ${dbAttributeNames.join(', ')}) VALUES (${row});\n`
+                            ));
 
                         // Invoke query statement to DB
                         let invokeDBWrite = function()
                         {
-                            const connection = getMySQLConnection();
-                            connection.query(sqlStatement, (error) =>
-                            {
-                                // Notify via Slack
-                                if (error) sendSlackMessage(`[SQL Error] ${jobName}`, error.sqlMessage);
-                                else sendSlackMessage('Done', `[Job Completed] ${jobName}, took ${moment().unix() - startedAt}s`, true);
+                            getMySQLConnection()
+                                .then((connection) => {
+                                    if (!connection)
+                                    {
+                                        bigResolve(true);
+                                        return;
+                                    }
 
-                                // Close connection
-                                connection.end();
-
-                                // Resolve
-                                bigResolve(true);
-                            });
+                                    connection
+                                        .request()
+                                        .query(sqlStatement)
+                                        .then(() => {
+                                            connection.close();
+                                            sendSlackMessage('Done', `[Job Completed] ${jobName}, took ${moment().unix() - startedAt}s`, true);
+                                            bigResolve(true);
+                                        })
+                                        .catch((error) => {
+                                            connection.close();
+                                            sendSlackMessage(`[SQL Error] ${jobName}`, error.message);
+                                            bigResolve(true);
+                                        });
+                                });
                         };
 
                         // Write to file for review
@@ -558,41 +562,50 @@ function importContactsFromXML()
 
                 json.forEach((item) => {
                     sqlValues.push(
-                        '(' +
                         keyList.map((attributeKey) => {
                             if (attributeKey === 'Active')
                             {
                                 return(item[attributeKey].toLowerCase() === 'yes' ? '1' : '0');
                             }
                             else return(parseAttributeValue(item[attributeKey]));
-                        }).join(', ') +
-                        ')'
+                        }).join(', ')
                     );
                 });
 
                 // Generate SQL statement
                 let sqlStatement =
-                    `INSERT INTO Contacts (${dbAttributeList.join(', ')})\n` +
-                    'VALUES\n' +
-                    sqlValues.join(',\n') +
-                    '\nON DUPLICATE KEY UPDATE\n' +
-                    dbAttributeList.map((item) => (item + ' = VALUES(' + item + ')')).join(',\n');
+                    sqlValues.map((row) => (
+                        `MERGE INTO dbo.Contacts AS t` +
+                        ` USING (SELECT ${row}) AS s (${dbAttributeList.join(', ')}) ON t.id = s.id` +
+                        ` WHEN MATCHED THEN UPDATE SET ${dbAttributeList.map((attributeName) => `t.${attributeName} = s.${attributeName}`).join(', ')}` +
+                        ` WHEN NOT MATCHED THEN INSERT (${dbAttributeList.join(', ')}) VALUES (${row});\n`
+                    ));
 
                 // Invoke query statement to DB
                 let invokeDBWrite = function()
                 {
-                    const connection = getMySQLConnection();
-                    connection.query(sqlStatement, (error) => {
-                        // Notify result via Slack
-                        if (error) sendSlackMessage(`[SQL Error] Import Contacts From XML`, error.sqlMessage);
-                        else sendSlackMessage('Done', `[Job Completed] Import Contacts From XML, took ${moment().unix() - startedAt}s`, true);
+                    getMySQLConnection()
+                        .then((connection) => {
+                            if (!connection)
+                            {
+                                resolve('Done');
+                                return;
+                            }
 
-                        // Close connection
-                        connection.end();
-
-                        // Resolve Promise
-                        resolve('Done');
-                    });
+                            connection
+                                .request()
+                                .query(sqlStatement)
+                                .then(() => {
+                                    connection.close();
+                                    sendSlackMessage('Done', `[Job Completed] Import Contacts From XML, took ${moment().unix() - startedAt}s`, true);
+                                    resolve('Done');
+                                })
+                                .catch((error) => {
+                                    connection.close();
+                                    sendSlackMessage(`[SQL Error] Import Contacts From XML`, error.message);
+                                    resolve('Done');
+                                });
+                        });
                 };
 
                 // Write to file for review
@@ -637,31 +650,42 @@ function importFosterAdopterFromXML()
                     keyList = Object.keys(attributeMap),
                     dbAttributeList = keyList.map((key) => attributeMap[key]);
 
-                json.forEach((item) => sqlValues.push('(' + keyList.map((attributeKey) => parseAttributeValue(item[attributeKey])).join(', ') + ')'));
+                json.forEach((item) => sqlValues.push(keyList.map((attributeKey) => parseAttributeValue(item[attributeKey])).join(', ')));
 
                 // Generate SQL statement
                 let sqlStatement =
-                    `INSERT INTO Animals (${dbAttributeList.join(', ')})\n` +
-                    'VALUES\n' +
-                    sqlValues.join(',\n') +
-                    '\nON DUPLICATE KEY UPDATE\n' +
-                    dbAttributeList.map((item) => (item + ' = VALUES(' + item + ')')).join(',\n');
+                    sqlValues.map((row) => (
+                        `MERGE INTO dbo.Animals AS t` +
+                        ` USING (SELECT ${row}) AS s (${dbAttributeList.join(', ')}) ON t.id = s.id` +
+                        ` WHEN MATCHED THEN UPDATE SET ${dbAttributeList.map((attributeName) => `t.${attributeName} = s.${attributeName}`).join(', ')}` +
+                        ` WHEN NOT MATCHED THEN INSERT (${dbAttributeList.join(', ')}) VALUES (${row});\n`
+                    ));
 
                 // Invoke query statement to DB
                 let invokeDBWrite = function()
                 {
-                    const connection = getMySQLConnection();
-                    connection.query(sqlStatement, (error) => {
-                        // Notify via Slack
-                        if (error) sendSlackMessage(`[SQL Error] Import Foster/Adopter From XML`, error.sqlMessage);
-                        else sendSlackMessage('Done', `[Job Completed] Import Foster/Adopter From XML, took ${moment().unix() - startedAt}s`, true);
+                    getMySQLConnection()
+                        .then((connection) => {
+                            if (!connection)
+                            {
+                                resolve('Done');
+                                return;
+                            }
 
-                        // Close connection
-                        connection.end();
-
-                        // Resolve
-                        resolve('Done');
-                    });
+                            connection
+                                .request()
+                                .query(sqlStatement)
+                                .then(() => {
+                                    connection.close();
+                                    sendSlackMessage('Done', `[Job Completed] Import Foster/Adopter From XML, took ${moment().unix() - startedAt}s`, true);
+                                    resolve('Done');
+                                })
+                                .catch((error) => {
+                                    connection.close();
+                                    sendSlackMessage(`[SQL Error] Import Foster/Adopter From XML`, error.message);
+                                    resolve('Done');
+                                });
+                        });
                 };
 
                 // Write to file for review
@@ -735,7 +759,7 @@ function importExtraAnimalValuesFromXML()
                     },
                     'originParsed': (item) => {
                         let originParsed = originMapping.find((origin) => origin['Origin'].toLowerCase() === item['Origin']?.toLowerCase())?.['Category'] || 'OS';
-                        return('"' + originParsed.replace(/\n/g, ' ').replace(/"/g, '') + '"');
+                        return("'" + originParsed.replace(/\n/g, ' ').replace(/"/g, '') + "'");
                     }
                 };
 
@@ -750,44 +774,53 @@ function importExtraAnimalValuesFromXML()
 
                     // Push value statement
                     sqlValues.push(
-                        '(' +
                         keyList
                             .map((attributeKey) => {
                                 if (attributeKey === 'ReceivedDate')
                                 {
-                                    return(item[attributeKey]?.trim() ? ('"' + moment(item[attributeKey], 'MM/DD/YYYY').format('YYYY-MM-DD') + '"') : 'NULL');
+                                    return(item[attributeKey]?.trim() ? ("'" + moment(item[attributeKey], 'MM/DD/YYYY').format('YYYY-MM-DD') + "'") : 'NULL');
                                 }
                                 else return parseAttributeValue(item[attributeKey]);
                             })
                             .concat(derivedValueArr)
-                            .join(', ') +
-                        ')'
+                            .join(', ')
                     );
                 });
 
                 // Generate SQL statement
                 let sqlStatement =
-                    `INSERT INTO Animals (${dbAttributeList.join(', ')})\n` +
-                    'VALUES\n' +
-                    sqlValues.join(',\n') +
-                    '\nON DUPLICATE KEY UPDATE\n' +
-                    dbAttributeList.map((item) => (item + ' = VALUES(' + item + ')')).join(',\n');
+                    sqlValues.map((row) => (
+                        `MERGE INTO dbo.Animals AS t` +
+                        ` USING (SELECT ${row}) AS s (${dbAttributeList.join(', ')}) ON t.id = s.id` +
+                        ` WHEN MATCHED THEN UPDATE SET ${dbAttributeList.map((attributeName) => `t.${attributeName} = s.${attributeName}`).join(', ')}` +
+                        ` WHEN NOT MATCHED THEN INSERT (${dbAttributeList.join(', ')}) VALUES (${row});\n`
+                    ));
 
                 // Invoke query statement to DB
                 let invokeDBWrite = function()
                 {
-                    const connection = getMySQLConnection();
-                    connection.query(sqlStatement, (error) => {
-                        // Notify via Slack
-                        if (error) sendSlackMessage(`[SQL Error] Import Origin/Received Date From XML`, error.sqlMessage);
-                        else sendSlackMessage('Done', `[Job Completed] Import Origin/Received Date From XML, took ${moment().unix() - startedAt}s`, true);
+                    getMySQLConnection()
+                        .then((connection) => {
+                            if (!connection)
+                            {
+                                resolve('Done');
+                                return;
+                            }
 
-                        // Close connection
-                        connection.end();
-
-                        // Resolve
-                        resolve('Done');
-                    });
+                            connection
+                                .request()
+                                .query(sqlStatement)
+                                .then(() => {
+                                    connection.close();
+                                    sendSlackMessage('Done', `[Job Completed] Import Origin/Received Date From XML, took ${moment().unix() - startedAt}s`, true);
+                                    resolve('Done');
+                                })
+                                .catch((error) => {
+                                    connection.close();
+                                    sendSlackMessage(`[SQL Error] Import Origin/Received Date From XML`, error.message);
+                                    resolve('Done');
+                                });
+                        });
                 };
 
                 // Write to file for review
@@ -840,6 +873,8 @@ secondHandHoundsRouter.post('/importExtraAnimalValuesFromXML', sloppyAuthenticat
 function executeAllJobs(isScheduler = false)
 {
     let notificationTitle = isScheduler ? 'Full Job Scheduler' : 'Path: /oneTimeImport';
+
+    totalStartedAt = moment().unix();
 
     return new Promise((resolve) => {
         Promise
@@ -1004,6 +1039,14 @@ secondHandHoundsRouter.post('/oneTimeImport', sloppyAuthenticate, (request, resp
 
     // Initiate all promises
     executeAllJobs();
+});
+// endregion
+
+// region GET - Latest Scheduler Config Item
+secondHandHoundsRouter.post('/schedulerConfigItem', sloppyAuthenticate, (request, response) =>
+{
+    getSchedulerConfig('fullJobFetch')
+        .then((result) => Success(response, 'Successfully got data', result));
 });
 // endregion
 

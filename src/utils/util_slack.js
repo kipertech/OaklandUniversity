@@ -5,6 +5,12 @@ export default function sendSlackMessage(title, body, isSuccess = false)
     return new Promise((resolve) => {
         const webHookLink = isSuccess ? process.env.SLACK_SUCCESS_LINK : process.env.SLACK_ERROR_LINK;
 
+        if (!webHookLink?.trim())
+        {
+            resolve(null);
+            return;
+        }
+
         fetch(webHookLink, {
             method: 'POST',
             headers: {

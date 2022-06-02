@@ -61,6 +61,7 @@
         "moment": "^2.29.1",
         "moment-timezone": "^0.5.34",
         "morgan": "~1.9.1",
+        "mssql": "^8.1.2",
         "mysql": "^2.18.1",
         "nightmare": "^3.0.2",
         "nightwatch": "^1.7.11",
