@@ -8,7 +8,6 @@ import {
 import { Router } from "express";
 import nodeScheduler from 'node-schedule';
 import moment from 'moment-timezone';
-import MySQL from 'mysql';
 import mssql from 'mssql';
 import { Promise } from "bluebird";
 import { writeFile } from "fs/promises";
@@ -273,7 +272,7 @@ function checkJobIsRunning(jobName = '')
 // endregion
 
 // region Function - Generate SQL Statement and Import to DB
-function parseAttributeValue(attributeValue)
+function parseAttributeValue(attributeValue, attributeName = '')
 {
     // Check null and undefined
     if (attributeValue === '' || attributeValue === null || attributeValue === undefined)
@@ -298,7 +297,11 @@ function parseAttributeValue(attributeValue)
     {
         case "string":
         {
-            if (isNaN(attributeValue))
+            if (moment(attributeValue, moment.ISO_8601, true).isValid())
+            {
+                returnValue = "'" + moment(attributeValue).tz('America/Chicago').format('YYYY-MM-DD') + "'";
+            }
+            else if (isNaN(attributeValue))
             {
                 returnValue = "'" + attributeValue.replace(/'/g, "'").replace(new RegExp("\'", 'g'), "''") + "'";
             }
@@ -375,7 +378,7 @@ function generateImportStatement({ jobName, apiLink, tableName, dbAttributeNames
 
                                             if (attributeValue)
                                             {
-                                                recordValues += (', ' + parseAttributeValue(attributeValue));
+                                                recordValues += (', ' + parseAttributeValue(attributeValue, key));
                                             }
                                             else recordValues += `, NULL`;
                                         });
